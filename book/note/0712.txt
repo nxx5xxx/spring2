@@ -1,0 +1,260 @@
+# 0712
+## equalsIgnoreCase
+	대소문자 일치 안해도됨
+## HashSet_retainAll
+	s2에 있는것만 s1에 남기는것 (교집합만)
+	공통 요소만 남김
+### 예제
+		HashSet<String> s1 = new HashSet<>();
+		s1.add("사과");
+		s1.add("망고");
+		s1.add("딸기");
+		s1.add("용과");
+		
+		HashSet<String> s2 = new HashSet<>();
+		s2.add("사과");
+		s2.add("키위");
+		s2.add("복숭아");
+		
+		System.out.println("s1"+s1);
+		System.out.println("s2"+s2);
+		
+		System.out.println("-------------------");
+		
+		//s2에 있는것만 s1에 남기는것 (교집합만)
+		//공통 요소만 남김
+		s1.retainAll(s2);
+		System.out.println("s1"+s1);
+		System.out.println("s2"+s2);
+### 결과값
+	s1[망고, 사과, 용과, 딸기]
+	s2[복숭아, 사과, 키위]
+	-------------------
+	s1[사과]
+	s2[복숭아, 사과, 키위]
+	
+---
+
+## @MatrixVariable[("매트릭스변수")] 매개변수
+	안된다면 servlet-context.xml 에<annotation-driven enable-matrix-variables="true"/> 이거추가해볼것
+	
+	@MatrixVariable은 @RequestMapping에 설정된 경로 변수에 포함된 매트릭스 변수의 값을 요청 처리 메서드의 매개변수로 전달받으며, 형식은 다음과 같습니다.
+
+	// 경로 변수 내 매트릭스 변수를 그대로 사용할 때
+	@RequestMapping("경로 변수") 
+	public String 메서드 이름(@MatrixVariable 매트릭스 변수, ...) {
+	    ...
+	}
+	// 경로 변수 내 매트릭스 변수를 재정의하여 사용할 때
+	@RequestMapping("경로 변수") 
+	public String 메서드 이름(@MatrixVariable(매트릭스 변수) 매개변수, ...) {
+	    ... 
+	}
+	
+### 예제1
+#### 컨트롤러
+	@GetMapping("/t3/{bookId}")
+	public String t3(@PathVariable String bookId,
+					@MatrixVariable("category") String category, Model model) {
+					//멤버변수랑 이름똑같으면 생략해도된다 @MatrixVariable 이라고 써도된단말
+		System.out.println("도서 ID"+bookId); //PathVariable로 받음
+		System.out.println("도서 분야"+category); //MatrixVariable로 받음
+		model.addAttribute("bookInfo","<br>도서 ID"+bookId+"<br>도서 분야"+category);
+		return "test/t3";
+	}
+#### jsp
+	<a href="/test/t3/ISBN-13;category=IT서적">BookId가 ISBN 매트릭스Variable로 받기</a><br>
+#### 결과값
+	도서 IDISBN-13
+	도서 분야IT서적
+	
+### 예제2	
+#### 컨트롤러
+	@GetMapping("/t5/{bookId}/category/{category}")
+	public String t5(@MatrixVariable(value="publisher" , pathVar="bookId") String d1,
+			@MatrixVariable(value="publisher" , pathVar="category") String d2,
+			Model model) {
+		//여기서 value는 받는것을 지정하기위해 , pathVar는 어느변수뒤에;가 붙냐를 보기위한것
+		System.out.println("출판사"+d1); //PathVariable로 받음
+		System.out.println("도서 분야"+d2); //MatrixVariable로 받음
+		model.addAttribute("data","<br>출판사 : "+d1+"<br>도서 분야 : "+d2);
+		return "test/t5";
+	}
+#### jsp
+	<a href="/test/t5/ISBN-13;publisher=좋은책/category/IT서적;publisher=아이티">매트릭스Variable로 받기2</a><br>
+#### 결과값
+	도서정보 :
+	출판사 : 좋은책
+	도서 분야 : 아이티
+
+	
+### 예제3
+#### 컨트롤러
+	@GetMapping("/t6/{bookId}")
+	public String t6(@PathVariable String bookId,
+			@MatrixVariable(required=false, defaultValue="아무개출판사") String d1,Model model) {
+			//required는 true가 default로 되어있다 , defaultValue는 값이 없을경우 들어올 값
+		System.out.println("도서 아이디 : " + bookId);
+		System.out.println("출판사 : " +d1);
+		model.addAttribute("data","<br>도서 아이디 : "+bookId+"<br>출판사 : "+d1);
+		
+		return "test/t6";
+	}
+#### jsp
+	<a href="/test/t6/ISBN-13">매트릭스Variable로 받기3</a><br>
+#### 결과값
+	도서정보 :
+	도서 아이디 : ISBN-13
+	출판사 : 아무개출판사
+	
+## MatrixVariable 과 같이쓰는 MultiValueMap
+#### 컨트롤러
+	@GetMapping("/t7/{bookId}/category/{category}")
+	public String t7(@PathVariable String bookId,@PathVariable String category,
+					@MatrixVariable MultiValueMap<String,String> mvm1,
+					@MatrixVariable(pathVar="category") MultiValueMap<String,String> mvm2,
+					Model model) {
+		System.out.println("도서 아이디 : " + bookId);
+		System.out.println("도서분류 : " +category);
+		System.out.println("mvm1 : " +mvm1);
+		System.out.println("mvm2 : " +mvm2);
+		model.addAttribute("bookData","<br>mvm1 : "+mvm1+"<br>mvm2 : "+mvm2);
+		return "test/t7";
+	}
+#### jsp
+	<a href="/test/t7/ISBN-13;publisher=민음사;
+	name=spring/category/IT서적;publisher=아이티출판사;author=아카데미">
+	매트릭스Variable로 받기4 MultiValueMap 사용
+	</a><br>
+#### 결과값
+	도서정보 :
+	mvm1 : {publisher=[민음사, 아이티출판사], name=[spring], author=[아카데미]}
+	mvm2 : {publisher=[아이티출판사], author=[아카데미]}
+	
+	mvm2에 추가해도 mvm1도 같은 키값을 갖고있으면 공유가된다
+	
+### 정리
+#### @PathVariable 
+		{}에 전달된 값을 받는다
+#### @MatrixVariable
+		;에 전달된 값을 받는다
+#### @RequestParam
+		?~ 에 전달된 값을 받는다
+		
+---
+
+## ModelAttribute 메소드수준에서 적용하기
+### 예제
+	@GetMapping("/t9")
+	public String showForm() {
+		return "test/t9";
+	}
+	
+	@ModelAttribute("title")
+	public String setTitle() {
+		return "@ModelAttribute 유형";
+	}
+	
+	/*
+	@ModelAttribute("subTitle")
+	public void setSubTitle(Model model) {
+		return "메소드 차원에서 @ModelAttribute 적용하기";
+	}
+	*/
+	//위 아래 둘다 같다
+	@ModelAttribute
+	public void setSubTitle(Model model) {
+		model.addAttribute("subTitle", "메소드 차원에서 @ModelAttribute 적용하기");
+	}
+	
+	@GetMapping("/t10")
+	public String showForm2() {
+		return "test/t10";
+	}
+	
+### jsp
+	<h3>${title }</h3>
+	<h3>${subTitle }</h3>
+	
+	t10도 이와동일
+	같은 컨트롤러 내 에있는 맵핑을 불러온다면
+	리퀘스트 속성에 적용될수있다
+	
+## @InitBinder
+### 예제
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		// formPage에서 biding 할려고 하는
+		// command 객체(여기서는 Book객체)
+		// 멤버변수(필드)들을 설정함
+		binder.setAllowedFields("bookId","name","unitPrice","author", "description" , "publisher",
+				"category","unitsInStock","totalPages","releaseDate","condition");
+		//즉 binder에 등록한 멤버변수만사용한다는것
+	}
+	
+## Spring Security
+	pom.xml , web.xml , securiy-context.xml참조
+	
+---
+#	작업중
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+
+	
+---
+
+	<!-- use-expressions="true" 표현식 사용할수있냐 -->
+    <http auto-config="true" use-expressions="true"> 
+    <!-- intercept-url 접근권한에 대한 패턴 -->
+    <!-- access 접근권한 -->
+        <intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+        <intercept-url pattern="/manager/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/member/**" access="isAuthenticated()" />
+        <intercept-url pattern="/**" access="permitAll" />
+	<!-- authentication-failure-url 인증실패시 이동할 페이지 -->
+         <form-login login-page="/login" 
+                    default-target-url="/books/regBook"  
+                    authentication-failure-url="/loginfailed"  
+                    username-parameter="username"  
+                    password-parameter="password"/>  
+        <csrf />
+        <logout logout-success-url="/logout"/>
+    </http> 
+
+---
+원본
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans:beans
+	    xmlns="http://www.springframework.org/schema/security"
+	    xmlns:beans="http://www.springframework.org/schema/beans"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/security
+	 http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	    <http auto-config="true" use-expressions="true"> 
+	         <intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+	         <intercept-url pattern="/manager/**" access="hasRole('ROLE_MANAGER')" />
+	         <intercept-url pattern="/member/**" access="isAuthenticated()" />
+	         <intercept-url pattern="/**" access="permitAll" />         
+	    </http> 
+	
+	    <authentication-manager> 
+	        <authentication-provider>
+	            <user-service>
+	                <user name="admin" password="{noop}1234"  authorities="ROLE_ADMIN, ROLE_USER" />
+	                <user name="manager" password="{noop}5678"  authorities="ROLE_MANAGER" />
+	                <user name="guest" password="{noop}123456"  authorities="ROLE_USER" /> 
+	            </user-service>
+	        </authentication-provider>
+	    </authentication-manager>
+	</beans:beans>
