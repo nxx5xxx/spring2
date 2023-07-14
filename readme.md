@@ -13,3 +13,8 @@
     ModelAttribute 메소드수준에서 적용하기
     InitBinder
     Spring Security - 미완
+
+## [0714](https://github.com/nxx5xxx/spring2/blob/master/0714.md)
+### 수업내용
+    Spring Security - 미완
+    Security Test - 미완
