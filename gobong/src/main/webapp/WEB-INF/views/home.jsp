@@ -15,12 +15,21 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	테스트페이지 입니다
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<br>
+<h1>이미지 불러오기 테스트</h1>
 <img src="${data_path }/img/logo.jpg" >
 <img src="${data_path }/img/logo2.jpg" >
-<a href="test?id=test1">아이디값 받아오기</a>
+<br>
+<h1>테스트</h1>
+<a href="test/test?id=test1">아이디값 받아오기 (DB연동테스트)</a><br>
+<a href="test/validateTest">발리데이트테스트</a><br>
+<a href="test/serverDirectoryTest">서버리얼패스 테스트</a><br>
+<a href="test/serverDirectoryTest2">서버리얼패스 사용해서 파일올리기 테스트</a><br>
+
+
 </body>
 </html>

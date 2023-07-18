@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
-	<ul>
-<%-- 	<li>${user.id }</li>
-	<li>${user.pw }</li>
-	<li>${user.email }</li>
-	<li>${user.tel }</li>
-	<li>${user.regdate }</li> --%>
-	<li>pw : ${pw }</li>	
-	</ul>
+	<h1>파일등록완료</h1>
 </body>
 </html>

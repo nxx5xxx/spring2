@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="board1">
+ <insert id="boardInsert" parameterType="kr.gobong.domain.BoardDTO" >
+ 	<![CDATA[
+ 	insert into board1 values(#{no},#{id},#{content},#{hashtag},
+ 	default,default,#{img1,jdbcType=NULL},#{img2,jdbcType=NULL},
+ 	#{img3,jdbcType=NULL},default)
+ 	]]>
+ </insert>
+</mapper>
+  
+
+    
