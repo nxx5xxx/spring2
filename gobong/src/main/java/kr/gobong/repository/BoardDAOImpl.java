@@ -15,19 +15,44 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-  //전재영0718 글 목록 보기
 	List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 	
 	@Override
 	public List<BoardDTO> getBoardList(){
-		return sqlSessionTemplate.selectList("board.getBoardList");
+
+		return sqlSessionTemplate.selectList("board1.getBoardList");
 	}
 	
-	//이재호0718
+
 	@Override
 	public void boardInsert(BoardDTO boardDTO) {
 		sqlSessionTemplate.insert("board1.boardInsert",boardDTO);
 
 	}
-
+	
+	//조태정 0719 글 삭제
+	@Override
+	public void boardDel(int no) {
+		sqlSessionTemplate.delete("board1.boardDel", no);
+	}
+	//조태정 0719 친구 게시글 목록 보기
+	@Override
+	public List<BoardDTO> getFriendBoardList(String id) {
+		return sqlSessionTemplate.selectList("board1.getFriendBoardList",id);
+	}
+	
+	/* 전재영0719 */
+	// 글 상세보기
+	@Override
+	public BoardDTO getBoardDetail(int no) {
+		return sqlSessionTemplate.selectOne("board1.getBoardDetail", no);
+	}
+	
+	// 글 수정하기
+	@Override
+	public void boardEdit(BoardDTO boardDTO) {
+		sqlSessionTemplate.update("board1.boardEdit", boardDTO);
+	}
+	
+	/*//전재영0719 */
 }

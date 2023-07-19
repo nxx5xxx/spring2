@@ -1,0 +1,45 @@
+--0718--
+
+views에 발리데이트와 db연동을위한
+test폴더 생성하였습니다
+
+TestController와
+UserController분리하였고
+발리데이션 테스트를위한 validateTest.jsp를 만들었습니다
+
+note에 발리데이션.txt 로 각 어노테이션에대한 설명있는것을 추가했습니다
+
+servlet-context.xml 추가 (주석참고)
+
+web.xml 추가(주석참고)
+
+gobong프로젝트가 아닌
+Servers폴더의 톰캣서버(gobong 서버 돌리는 서버) -config에서
+context.xml의
+<Context> 를
+아래와 같이 설정해줍니다
+<Context allowCasualMultipartParsing="true">
+
+
+--------
+sql파일에서 수정해야할것
+
+-- 보드테이블 upcheck 삭제
+
+CREATE TABLE board1 (
+    no number primary key,
+    id varchar2(30) ,
+    content varchar2(500),
+    hashtag varchar2(100),
+    up number default 0,
+    regdate date default sysdate not null,
+    img1 varchar2(1000) not null,
+    img2 varchar2(1000),
+    img3 varchar2(1000),
+    prv number default 0 --전체공개, 친구공개, 비공개
+    ,foreign key(id) references user1(id)
+);
+
+--수정으로 컬럼제거할시
+
+alter table board1 drop column upcheck;

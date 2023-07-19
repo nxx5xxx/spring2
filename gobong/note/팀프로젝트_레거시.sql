@@ -39,7 +39,6 @@ CREATE TABLE board1 (
 
 alter table board1 drop column upcheck;
 
-insert into board1 values(3, 'wjdwnsgk', '안녕하세요123456666');
 
 commit;
 
@@ -96,7 +95,7 @@ commit;
 ----------------------------------------------------------------------------------------------------
 -- 셀렉트구문
 
-
+--유저
 --본인을 팔로우한 사람 조회
 select u.id from user1 u inner join follows f on f.id = u.id where f.following_id = 'test2';
 
@@ -107,8 +106,22 @@ select u.id , f.following_id from user1 u inner join follows f on f.id = u.id wh
 select b.id, b.no from board1 b inner join follows f on f.id = b.id where f.follower_id = 'sons1998' order by;
 select pw from user1 where id = 'test1';
 
+--보드
+select * from board1;
+update board1 set up=up+1 where no=8;
+commit;
+desc board1;
+--좋아요
+select * from like1;
+desc like1;
+insert into like1 values(no, id upcheck);
+insert into like1 values(1,'test1',1);
 --------------------------------------------------------------------------------------------------------------
+--인서트구문
+--회원가입
+insert into user1(id,name,pw,email,tel,regdate,img) values('test6','테스트6','1234','dddd@naver.com','dddd',default,default);
 
+--------------------------------------------------------------------------------------------------------------
 -- 더미테이블
 
 -- 더미유저
@@ -129,6 +142,8 @@ select * from board1;
 
 commit;
 
+select * from user1;
+
 -------------------------------------
 
 
@@ -141,3 +156,9 @@ CREATE TABLE test_board (
 insert into test_board values(1,'테스트내용입니다','file');
 commit;
 select * from test_board;
+
+insert into board1 values (9, 'test1', '테스트내용1', '#해시태그', default, default, 'test1.jpg', 'img2.png', 'img3.png', default);
+delete from board1 where no>=0;
+commit;
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc;
+select * from board1;

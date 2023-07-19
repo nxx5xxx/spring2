@@ -43,3 +43,163 @@ CREATE TABLE board1 (
 --수정으로 컬럼제거할시
 
 alter table board1 drop column upcheck;
+
+--------------------------------------------------------
+
+-- 0719
+1)
+	join_success.jsp
+	join.jsp
+	login.jsp
+	세 파일 views>user(생성한폴더)로 옮김
+
+2)
+	header.jsp
+	          <!-- 김우주0719 -->
+	          <!-- <a href="${path1 }/user/join" class="button is-success is-light" onclick="join()">회원가입</a> -->
+	          <input type="button" class="button is-success is-light" value="회원가입" onclick="joinbtn()"/>
+	          <script>
+	          	function joinbtn(){
+	          		alert('join회원가입 시작');
+	          		window.open('${path1 }/user/join','회원가입','width=700px,height=800px,scrollbars=yes');
+	          	}
+	          	
+	          </script>
+	          <!-- //김우주0719 -->	 
+
+3)
+	UserController.java 
+	@RequestMapping("/user")추가
+
+4)
+	UserController.java
+	return (26,32,36번째줄 ) 에 user/ 추가
+	
+	*
+	1번 작업을 안하더라도 2~4번 2번의 path1작업을 안할시
+	board같은 url에서(게시판보기) join으로 들어간다면
+	gobong/join 이아닌
+	gobong/board/join이 되어 404에러가 나게됩니다
+
+5)
+	join.jsp 하단 copy라이트부분 빼버림
+	(join.jsp덮어씌우기 하면됩니다)
+
+6)
+	게시판고유번호(게시판이 없을시, 게시판이 겹칠시 등등 nextval의 기능해줄수있는것)을 추가하였습니다
+	BoardServiceImpl.java
+	31번째줄 주석
+	63번째줄 주석
+	
+	
+7) 
+	승기씨파일 합치기 작업
+	
+8)
+	header.jsp
+	73번째줄 수정
+			<form:form action="${path1 }/user/loginPro" modelAttribute="tmpUserLogin"
+			method="post" class="box">
+			
+9) 
+	form:form태그 사용시 모델어트리뷰트 충돌로인해
+			<form action="${path1 }/user/loginPro"	method="post" class="box">
+	태그 등으로 수정
+	안에 /form:form 까지 싹다 드래그해서 붙여넣기하면 될겉같음
+	
+-----------------너무길어져서 나눔줄 추가합니다
+
+10) 
+	user_mapper.xml
+	23번째줄
+	insert into user1(id,name,pw,email,tel,regdate,img) values(#{id},#{name},#{pw},#{email},#{tel},default,default)
+	으로 변경
+	
+	(컬럼을 중간에 변경했던게 있어서 사람마다 컬럼순서가 달라 변경했습니다)
+	
+	
+11)
+	join.jsp
+	3번째줄
+	<c:set var="path1" value="${pageContext.request.contextPath }" />
+	패스뒤에 /가 잡혀있어 주소표시창에 //로 나오는 현상있고(action에서 고쳐도되지만)
+	다른 jsp들의 형식엔 콘텍스트뒤에 /를 기재하지않는 형식이라
+	join에서 삭제하였습니다
+	27번째줄
+	<form:form action="${path1 }/user/join_procedure" method="post" modelAttribute="joinUserDto" class="box">
+	views폴더에있던것을 user폴더로 옮겨 인식하지못하는걸 수정하였습니다
+	
+
+12)
+	join_success.jsp
+	6번째줄
+	   window.close()
+	로 수정하여 회원가입팝업을 닫게하였습니다
+	
+13)
+	board_list.jsp
+	33번째줄
+		            <img src="${data_path }/upload/${boardDTO.img1 }" alt="글사진">
+	로 수정하여 글 사진이 보이도록 수정했습니다
+	
+14)
+	user_mapper.xml
+	20번째줄
+	<select ~~~ 로써있는걸 <insert ~~~>로
+	25번째쭐
+	</select>인것을 </insert>로 수정했습니다
+	
+15)
+	header.jsp
+	9번째줄 제이쿼리 추가문
+	  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"></script>
+  추가
+  
+ 16)
+ 	board_list.jsp 좋아요추가
+	          <!-- 김우주0719 -->
+          <div>	          
+          	<input type="button" value="좋아요" onclick="like_check(${boardDTO.up },${boardDTO.no })"/>
+
+          </div>
+          <script>
+          	function like_check(like,no){
+          		
+          		alert('글번호' + no);
+          		alert('현재좋아요수' + like);
+          		$.ajax({
+					type:"get",
+					url:"${path}/like/upLike.do",
+					dataType:"json",
+					encType:"UTF-8",
+					data: {no:no},
+					//async: false
+          		});
+          	}
+          </script>
+          <!-- //김우주0719 -->
+          
+17)
+	좋아요 누를시 like1 테이블에 등록추가
+	like_mapper.xml , LikeDTO , LikeDAO , LikeDAOImpl , LikeService, LikeServiceImpl , LikeController추가 
+	
+18)
+	태정씨꺼랑 합친 후
+	태정씨 게시글 삭제를 실행시 좋아요 테이블에있는 참조값들 삭제	
+	
+19)
+	태정씨가 작업한
+	header.jsp
+	script간소화
+	
+20)
+	로그인안했을시 좋아요 누르면 로그인창뜨도록 유도
+	
+21)
+	부트스트랩 css폴더에 추가
+	
+22)
+	재영씨 수정페이지 작업 중

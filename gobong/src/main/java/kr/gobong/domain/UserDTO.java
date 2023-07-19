@@ -25,6 +25,10 @@ public class UserDTO {
 	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String pw2;
 
+    //0718손승기
+    private boolean userLogin; // 로그인 상태인지 아닌지 여부를 저장하는 멤버변수
+    //0718손승기
+
 	public String getId() {
 		return id;
 	}
@@ -88,4 +92,14 @@ public class UserDTO {
 	public void setPw2(String pw2) {
 		this.pw2 = pw2;
 	}
+
+	public boolean isUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(boolean userLogin) {
+		this.userLogin = userLogin;
+	}
+    
+    
 }

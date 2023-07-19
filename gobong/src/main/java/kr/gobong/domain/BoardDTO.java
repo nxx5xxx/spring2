@@ -18,6 +18,16 @@ public class BoardDTO {
 	private String name;
 	private int prv;
 	private String img;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "BoardDTO [no=" + no + ", id=" + id + ", content=" + content + ", hashtag=" + hashtag + ", up=" + up
+				+ ", regdate=" + regdate + ", upload_img1=" + upload_img1 + ", upload_img2=" + upload_img2
+				+ ", upload_img3=" + upload_img3 + ", img1=" + img1 + ", img2=" + img2 + ", img3=" + img3 + ", name="
+				+ name + ", prv=" + prv + ", img=" + img + "]";
+	}
 	public int getNo() {
 		return no;
 	}

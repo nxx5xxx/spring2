@@ -29,7 +29,14 @@
 <a href="test/validateTest">발리데이트테스트</a><br>
 <a href="test/serverDirectoryTest">서버리얼패스 테스트</a><br>
 <a href="test/serverDirectoryTest2">서버리얼패스 사용해서 파일올리기 테스트</a><br>
-
+<br>
+<input type="button" value="버튼테스트" onclick="joinbtn()"/>
+<script>
+	function joinbtn(){
+		alert('join회원가입 시작');
+	}
+	
+</script>
 
 </body>
 </html>

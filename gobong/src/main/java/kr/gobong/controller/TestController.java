@@ -35,6 +35,7 @@ public class TestController {
 	
 	@GetMapping("/home")
 	public String testHome() {
+		System.out.println("홈으로");
 		return "home";
 	}
 	
