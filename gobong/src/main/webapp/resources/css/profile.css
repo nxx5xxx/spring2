@@ -1,0 +1,37 @@
+@charset "UTF-8";
+<!-- profile.jsp 스타일 -->
+.image {
+	height:160px; 
+	width:160px;
+}
+
+.media { 
+	background-color:#faf5f5; height:160px; 
+}
+
+.media-left, .media-content { 
+	padding-top:16px; 
+	padding-left: 12px; 
+}
+
+#board_wrap { 
+	background-color:#faf5f5;
+}
+
+#board_img { 
+	display:block; 
+	float:left; 
+	height:200px; 
+	width:25%; 
+	box-sizing:border-box; 
+}
+
+.footer { 
+	position:absolute; 
+	bottom:0; 
+	width:100%; 
+}
+
+#profile_img {
+	width:128px; height:128px;
+}

@@ -40,7 +40,7 @@
 			              	<p class="subtitle is-6">${boardDTO.id}</p>
 		           		</div>
 		           	</div>	
-	           		<div class="content">		
+	           		<div class="content">
 						<div class="form-group">
 							<form:label path="content" value="${boardDTO.content }">내용</form:label>
 							<form:input path="content" class="form-control" />

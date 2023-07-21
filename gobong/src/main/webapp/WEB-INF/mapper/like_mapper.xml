@@ -14,5 +14,15 @@
 	<delete id="deleteLike" parameterType="java.lang.Integer">
 		delete from like1 where no=#{no}
 	</delete>
+	<!-- 김우주0720 -->
+	<update id="disLike" parameterType="java.lang.Integer">
+		update board1 set up=up-1 where no=#{no}	
+	</update>
+	
+	<select id="likeListInBoard" parameterType="java.lang.Integer" resultType="kr.gobong.domain.LikeDTO">
+		select * from like1 where no=#{no}
+	</select>
+	
+	<!-- //김우주0720 -->
 </mapper>
 

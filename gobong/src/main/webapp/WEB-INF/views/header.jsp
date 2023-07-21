@@ -49,9 +49,11 @@
 				<div class="navbar-item has-dropdown is-hoverable">
 					<a class="navbar-link">My Page</a>
 					<div class="navbar-dropdown">
-						<a class="navbar-item" href="like_list">좋아요 ♥</a> <a
-							class="navbar-item" href="user_mod">정보수정</a> <a
-							href="${path1 }/user/logout" class="navbar-item" href="logout">로그아웃</a>
+						<a class="navbar-item" href="like_list">좋아요 ♥</a> 
+						<!-- 0719 손승기 --> 
+						<a href="${path1 }/user/profile?id=${loginUser.id}" class="navbar-item"><img src="">프로필</a> 
+						<a href="${path1 }/user/logout" class="navbar-item">로그아웃</a>
+						<!-- 0719 손승기 -->
 					</div>
 				</div>
 			</c:when>

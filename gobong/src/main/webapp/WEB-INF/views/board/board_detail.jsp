@@ -51,7 +51,7 @@
 	          </div>
 	          <div>
 	          	<a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button">수정</a>
-	          	<a href="" class="button">삭제</a>
+	          	<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button">삭제</a>
 	          </div>
 	        </div>
 	      </div>

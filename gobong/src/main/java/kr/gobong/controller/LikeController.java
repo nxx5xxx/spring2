@@ -1,5 +1,7 @@
 package kr.gobong.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.gobong.domain.LikeDTO;
 import kr.gobong.domain.UserDTO;
@@ -24,17 +27,32 @@ public class LikeController {
 	@Lazy
 	private UserDTO loginUser;
 	
+	
+	
 	@GetMapping("/upLike.do")
-	public void upLike(@RequestParam("no") int no) {
-		System.out.println(no);
-		System.out.println("upLike동작");
+	public void upLike(@RequestParam("no") int no,LikeDTO likeDto) {
 		likeService.upLike(no);
-		LikeDTO likeDto = new LikeDTO(); 
-		
 		likeDto.setNo(no);
-		likeDto.setId(loginUser.getId());
-		likeDto.setUpcheck(1);
 		likeService.registLike(likeDto);
 		
 	}
+	
+	@GetMapping("/disLike.do")
+	public void disLike(@RequestParam("no") int no,LikeDTO likeDto) {
+		likeService.disLike(no);
+		
+	}
+	
+	
+	//펑션 안넣고 c:if 좋아요 0보다 클경우 스크립트시작으로 하면될듯
+	@GetMapping("/likeList.do")
+	@ResponseBody 
+	public List<LikeDTO> likeList(@RequestParam("no") int no){
+		List<LikeDTO> likeList = likeService.likeListInBoard(no);
+		return likeList;
+	}
+
+	
+	
+	
 }

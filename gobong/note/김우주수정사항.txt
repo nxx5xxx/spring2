@@ -203,3 +203,120 @@ alter table board1 drop column upcheck;
 	
 22)
 	재영씨 수정페이지 작업 중
+	
+23)
+	수정페이지 수정 완료
+	
+-- 0720
+
+1)
+	세션및 쿠키 테스트페이지 추가
+	test폴더 내 sessionTest.jsp
+	그를연결하기위한 home.jsp 수정
+	TestController.java 코드추가
+	
+2)
+	UserController.java
+	로그아웃 수정
+	(세션값삭제)
+
+3)
+	로그아웃시 모든 쿠키정보도 삭제하도록함
+	
+4)
+	jsessionid형태의 쿠키를 제거할필요가 없다는걸 알게되어
+	쿠키정보 삭제에 대한걸 주석처리로함
+	혹여나 누군가 쿠키사용시 제거할때 참고
+	
+5)
+	파일올렷을시 미리보기가 되는것 테스트
+	(FileReader() 사용할것임)
+	fileReaderTest.jsp추가
+	TestController.java수정
+	--테스트컨트롤러는 저만쓰는거같으니까 그냥 덮어씌우기하세요
+	
+6)
+	미리보기 테스트완료
+	
+	FileReader()객체에서
+	메서드 궁금할수도있어서 설명 달아놔요
+		readAsArrayBuffer(~) : ArrayBuffer형식으로 파일을 읽음
+		readAsBinaryString(~) : binary형식으로 읽음
+		readAsText(~) : text형식으로
+		readAsDataURL(~) : 데이터URL형식으로
+		abort() : 일기를 중지
+		여기서 ~에 들어가는건 blob(Binary Large Objects)객체류인데
+		파일류의 불변하는 미가공 데이터 즉, 단순한 텍스트가 아닌 이미지 , 동영상 , 사운드 등 뜻함
+	FileReader 이벤트핸들러 목록 (이벤트가 작동시 실행되는거)
+		onload : 읽기 성공시 실행됨
+		onloadstart : 읽기 시작시 실행됨
+		onabort : 읽기 중단시 실행
+		onerror : 읽기 에러시 실행
+		onprogress : 읽는 중에 실행(읽는중 정기적?으로)
+		onloadend : 성공 실패와 상관없이 읽기가 끝났을때 실행
+	FileReader 의 프로퍼티
+		result : 읽기 결과가 저장됨
+		error : 읽기 실패시에 에러정보가 저장
+		readyState : 읽기 처리 상태를 나타낼수 있는 정수값
+		EMPTY : 읽기 시작전 - readyState 0
+		LOADING : 읽는중 - readyState 1
+		DONE : 읽기 완료 - readyState 2 - 성공실패 관계없이
+		
+	사용법 예
+		파일리더 객체생성
+		const READER = new FileReader();
+		파일리더 객체에서 x (함수등으로 받은값) 을 텍스트형식으로 읽기
+		READER.readAsText(x);
+		읽기 성공시 읽기결과 표시 - onload가 읽기 성공시 실행되므로
+		READER.onload = function(y){
+			let text1 = y.target.result 또는 READER.result 해도됨
+			alert(text1)
+		}
+	
+	
+7)
+	미리보기
+	boardInsert.jsp에 파일미리보기 추가했습니다
+	25번째줄 스크립트주석 , 
+	68~83 <div>태그 사이 참조
+	
+8)
+	승기씨 파일 병합작업
+	
+9)
+	
+	유저 수정은되나 fail페이지로 넘어갑니다 수정이 필요한건지 21일날 확인해봐야할듯하네요
+	
+10)
+
+	fail페이지로 넘어가는원인
+	@Size(2~4)여서 그런걸로 확인해서
+	Size를 6으로 수정했습니다
+	- UserDTO 16번째줄
+	@Size(min = 2, max = 6)
+
+	
+11)
+	좋아요작업2
+	이미 누른거 누를시 그 값 없애기
+	delete from like1 where no=2 and id='test1';
+	좋아요가 취소될시 원래 그 게시글의 값에서 좋아요 수도 -를 해줘야한다
+	
+11-1)
+	disLike 맵다서컨 추가
+
+11-2)
+	dis라이크 기능을 사용하기위해 jsp에 if판단절을 삽입해줘야함
+	그에 대한 작업
+	Board-list에 like목록을 같이 불러오게 해줘야한다
+	
+11-3)
+	list에 하나씩 넣어주고 불러주는것 비효율적인것같아
+	ajax와 자바스크립트를 혼용하여 처리
+	펑션 안넣고 c:if 좋아요 0보다 클경우 스크립트시작으로 하도록 해보아야겠다
+	
+--구현중 시간이 늦어 여기까지만 합니다
+
+0721
+	완벽히 구현해놓고 업로드하겠습니다
+	
