@@ -10,7 +10,6 @@ public interface UserDAO {
 
 	
 	public UserDTO getUserTest(String id);
-	public String checkUserIdExist(String id);
 	public void addUserInfo(UserDTO joinUserDto);
 	public UserDTO getUserLogin(UserDTO tmpUserLogin);	//로그인
 	/* 0719 손승기 */
@@ -20,5 +19,15 @@ public interface UserDAO {
 	
 	public List<UserVO> getUserProfile(String id);
 	/* 0719 손승기 */
+	
+	/* 0721 조태정 */
 	public void userDel(String id); //회원탈퇴
+	
+	public List<UserVO> searchUser(String id); //회원 검색
+	/* 0721 조태정 */
+	
+	/* 0723김우주 */
+	//아이디 중복체크
+	public int duplicationCheckId(String id);
+	/* 0723김우주 */
 }

@@ -17,4 +17,4 @@
 ## [0714](https://github.com/nxx5xxx/spring2/blob/master/0714.md)
 ### 수업내용
     Spring Security - 미완
-    Security Test - 미완
+    Security Test - 스프링시큐리티가 되지않아 이걸로 이어서함

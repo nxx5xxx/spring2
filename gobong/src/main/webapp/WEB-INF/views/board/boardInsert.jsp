@@ -55,10 +55,7 @@
             <form:input path="no" class="form-control" />
          </div> 
    --%>
-			<div class="field">
-				<form:label path="id">아이디</form:label>
-				<form:input path="id" class="input" />
-			</div>
+				<form:input type="hidden" path="id" class="input" value="${loginUser.id }"/>
 			<br>
 			<div class="field">
 				<form:label path="content">내용</form:label>
@@ -68,15 +65,17 @@
 			</div>
 			<br>
 			<div class="field">
+				<form:errors path="hashtag" />
 				<form:label path="hashtag">해시태그</form:label>
 				<form:input path="hashtag" class="input" placeholder="#따봉 #쌍따봉 #고봉" />
 			</div>
 			<br>
 			<!-- 김우주0720 -->
 			<div class="field">
+				<form:errors path="img1" />
+				<form:errors path="upload_img1" />
 				<form:label path="upload_img1">이미지1</form:label>
-				<form:input type="file" path="upload_img1" class="file"
-					accept="image/*" onchange="previewFile(this,'preview_img1')" />
+				<form:input type="file" path="upload_img1" class="file" accept="image/*" onchange="previewFile(this,'preview_img1')" />
 				<h5>파일미리보기</h5>
 				<img src="" id="preview_img1">
 			</div>
@@ -96,6 +95,21 @@
 				<h5>파일미리보기</h5>
 				<img src="" id="preview_img3">
 			</div>
+			<!-- 이재호0721 -->
+			<div class="field">
+				<form:label path="prv">공개 여부</form:label>
+			    <div>
+			      <input type="radio" id="prv0" name="prv" value="0" checked/>
+			      <label for="prv0">전체 공개</label>
+			
+			      <input type="radio" id="prv1" name="prv" value="1" />
+			      <label for="prv1">친구 공개</label>
+			
+			      <input type="radio" id="prv2" name="prv" value="2" />
+			      <label for="prv2">비공개</label>
+			    </div>
+			</div>
+			<!-- //이재호0721 -->
 			<!-- //김우주0720 -->
 			<br>
 			<div class="field">
@@ -108,16 +122,6 @@
 		</form:form>
 	</div>
 	<br>
-	<footer class="footer">
-		<div class="content has-text-centered">
-			<p>
-				<a href="test/home">테스트로 이동</a> <a
-					href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-				website content is licensed <a
-					href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY
-					NC SA 4.0</a>.
-			</p>
-		</div>
-	</footer>
+<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

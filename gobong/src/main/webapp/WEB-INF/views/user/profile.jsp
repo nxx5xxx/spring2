@@ -49,12 +49,11 @@
     </div>
   </article>
       <!-- 0720 손승기 게시글이미지 영역 -->
-	<div class="card-wrap" id="board_wrap">
-		<c:forEach var="board" items="${userProfile}">
-			<img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview">
-		</c:forEach>
-		
-	</div>
+   <div class="card-wrap" id="board_wrap">
+      <c:forEach var="board" items="${userProfile}">
+         <a href="${path }/board/boarddetail?no=${board.no}"><img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview"></a>
+      </c:forEach>      
+   </div>
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item" aria-label="reply">

@@ -10,4 +10,6 @@ public interface LikeDAO {
 	public void deleteLikeForBoard(int no);
 	public void disLike(int no);
 	public List<LikeDTO> likeListInBoard(int no);
+	public int likeCheck(LikeDTO likeDto);
+	public void deleteLikeFromId(LikeDTO likeDto);
 }

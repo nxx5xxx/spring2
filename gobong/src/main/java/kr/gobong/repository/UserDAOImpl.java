@@ -25,12 +25,6 @@ public class UserDAOImpl implements UserDAO {
 	public UserDTO getUserTest(String id) {
 		return sqlSessionTemplate.selectOne("user1.getUserTest", id);
 	}
-	
-	@Override
-	public String checkUserIdExist(String id) {
-		String name = sqlSessionTemplate.selectOne("user1.checkUserIdExist", id);
-		return name;
-	}
 
 	@Override
 	public void addUserInfo(UserDTO joinUserDto) {
@@ -52,8 +46,23 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSessionTemplate.selectList("user1.getUserProfile", id);
 	}
 	/* 0719 손승기 */
+
+	/* 0721 조태정 */
 	@Override
 	public void userDel(String id) {
 		sqlSessionTemplate.delete("user1.userDel", id);
 	}
+
+	@Override
+	public List<UserVO> searchUser(String id) {
+		return sqlSessionTemplate.selectList("user1.searchUser", id);
+	}
+	/* 0721 조태정 */
+	
+	/* 0723김우주 */
+	@Override
+	public int duplicationCheckId(String id) {
+		return sqlSessionTemplate.selectOne("user1.duplicationCheckId", id);
+	}
+	/* 0723김우주 */
 }

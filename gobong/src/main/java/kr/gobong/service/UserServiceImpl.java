@@ -47,16 +47,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean checkUserIdExist(String id) {
-		String name = userDao.checkUserIdExist(id);
-		if (name == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	@Override
 	public void addUserInfo(UserDTO joinUserDto) {
 		userDao.addUserInfo(joinUserDto);
 	}
@@ -97,23 +87,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println(userModify.getImg());
 		System.out.println(userModify.getUpload_img());
 		MultipartFile upload_img = userModify.getUpload_img();
-		System.out.println("유저임플");
-		System.out.println("userModify.id : " + userModify.getId());
-		System.out.println("userModify.name : " + userModify.getName());
-		System.out.println("userModify.pw : " + userModify.getPw());
-		System.out.println("userModify.email : " + userModify.getEmail());
-		System.out.println("userModify.tel : " + userModify.getTel());
-		System.out.println("userModify.img : " + userModify.getImg());
 		
 		if(upload_img.getSize() > 0) {
 			String fileName = saveUploadFile(upload_img);
-			System.out.println("fileName : " + fileName);
 			userModify.setImg(fileName);
-			System.out.println("loginUser.img : " + loginUser.getImg());
-			System.out.println("userModify.img : " + userModify.getImg());
 		}
 
-		System.out.println("userModify.img : " + userModify.getImg());
 		userDao.userModifyPro(userModify);
 	}
 	
@@ -122,9 +101,27 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserProfile(id);
 	}
 	/* 0719 손승기 */
+	
+	/* 조태정0721 */
 	//탈퇴
 	@Override
 	public void userDel(String id) {
 		userDao.userDel(id);
 	}
+
+	@Override
+	public List<UserVO> searchUser(String id) {
+		return userDao.searchUser(id);
+	}
+	/* 조태정0721 */
+	
+	
+	/* 0723김우주 */
+	//아이디 중복체크
+	@Override
+	public int duplicationCheckId(String id) {
+		return userDao.duplicationCheckId(id);
+	}
+	/* 0723김우주 */
+	
 }

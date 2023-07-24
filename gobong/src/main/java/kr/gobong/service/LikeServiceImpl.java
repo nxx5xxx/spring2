@@ -51,4 +51,19 @@ public class LikeServiceImpl implements LikeService{
 	public List<LikeDTO> likeListInBoard(int no) {
 		return likeDao.likeListInBoard(no);
 	}
+	@Override
+	public int likeCheck(int no,String id ) {
+		LikeDTO likeDto = new LikeDTO();
+		likeDto.setNo(no);
+		likeDto.setId(id);
+		return likeDao.likeCheck(likeDto);
+	}
+	//테이블에서 내역삭제
+	@Override
+	public void deleteLikeFromId(int no, String id) {
+		LikeDTO likeDto = new LikeDTO();
+		likeDto.setNo(no);
+		likeDto.setId(id);
+		likeDao.deleteLikeFromId(likeDto);
+	}
 }

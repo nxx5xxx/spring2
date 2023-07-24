@@ -10,4 +10,6 @@ public interface LikeService {
 	public void deleteLikeForBoard(int no);
 	public void disLike(int no);
 	public List<LikeDTO> likeListInBoard(int no);
+	public int likeCheck(int no,String id);
+	public void deleteLikeFromId(int no, String id);
 }

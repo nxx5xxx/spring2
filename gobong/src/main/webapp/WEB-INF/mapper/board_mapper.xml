@@ -2,23 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board1">
-
+	<!-- 김우주0724 -->
+	<!-- 전체공개글만 볼수있도록 수정 -->
 	<!-- 글 목록 보기 -->
 	<select id="getBoardList" parameterType="java.lang.Integer"
 		resultType="kr.gobong.domain.BoardDTO">
 		<![CDATA[
-			select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up from user1 u inner join board1 b on u.id=b.id order by b.no desc
+			select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up, (select count(*) from reply where no = b.no) as reply_cnt from user1 u inner join board1 b on u.id=b.id where b.prv=0 order by b.no desc
 		]]>
 	</select>
-	<!-- 글 등록 -->
+	<!-- 글 번호 자동화 -->
+	<select id="getReplyNo" resultType="java.lang.Integer">
+		<![CDATA[
+			select no from (select * from board1 order by no desc) where rownum=1
+		]]>
+	</select>	
+	
+	<!-- 김우주0724 -->
+
+	
+	<!-- 이재호0721 -->
 	<insert id="boardInsert"
 		parameterType="kr.gobong.domain.BoardDTO">
 	 	<![CDATA[
 	 	insert into board1 values(#{no},#{id},#{content},#{hashtag},
 	 	default,default,#{img1,jdbcType=NULL},#{img2,jdbcType=NULL},
-	 	#{img3,jdbcType=NULL},default)
+	 	#{img3,jdbcType=NULL},#{prv})
 	 	]]>
 	</insert>
+	<!-- //이재호0721 -->
 	
 	<!-- 0719 조태정 글 삭제 -->
 	 <delete id="boardDel" parameterType="kr.gobong.domain.BoardDTO" >
@@ -28,13 +40,16 @@
 	 </delete>
 	 
 	<!-- 0719 조태정 test1이 팔로우한 글 목록 보기(친구 게시글) -->
+	<!-- 김우주0724 -->
+	<!-- 전체공개 및 친구공개만 볼 수 있도록 수정 -->
 	<select id="getFriendBoardList" parameterType="java.lang.String" resultType="kr.gobong.domain.BoardDTO">
 		<![CDATA[
 		select DISTINCT b.no, u.name, b.id as id, u.img, b.content, b.img1, b.hashtag, b.regdate
 		from board1 b, follows f, user1 u 
-		where b.id=f.following_id and u.id=f.id and u.id=#{id} order by b.regdate desc
+		where b.id=f.following_id and u.id=f.id and u.id='test1' and b.prv<=1 order by b.regdate desc
 		]]>
-	</select>	 
+	</select>
+	<!-- 김우주0724 -->	 
 	<!-- 0719전재영 -->
 	 	<!-- 글 상세보기 -->
  	<select id="getBoardDetail" parameterType="java.lang.Integer" resultType="kr.gobong.domain.BoardDTO">

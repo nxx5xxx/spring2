@@ -319,4 +319,293 @@ alter table board1 drop column upcheck;
 
 0721
 	완벽히 구현해놓고 업로드하겠습니다
+0722
+	좋아요기능 대폭수정
+	동적교체와 비동기를 적절하게 사용하여
+	페이지새로고침없이 좋아요추가 및 삭제 
+	팀원들 파일 병합작업
 	
+0723
+--회원가입 비밀번호와 비밀번화 확인이 같을때만 통과하도록해야함
+--회원가입 중복체크해야함
+
+1)
+	UserContoller
+	131번째줄 searchUser 수정
+	
+	수정중 구현된 기능으로 하기가 힘듬을 느껴 2)에 커스텀 발리데이션 추가하고 다시 1)을 진행하겠습니다
+	
+2)
+	유저와 해쉬태그검색의 차이를 두기위해
+	커스텀 발리네이션 추가
+	
+2-1)
+	커스텀유효성검사를 하기위해
+	서블릿앱컨텍스트에 프로퍼티스파일 등록
+	servlet-context.xml 57번째줄 
+						<beans:value>/WEB-INF/properties/custom_vali</beans:value>
+	로 수정
+	
+2-2) 
+	kr.gobong.validator패키지 추가
+
+2-3) 
+	BoardController.java
+	191번째줄 추가
+	
+2-4)
+	WEB-INF/properties/custom_vali.properties
+	추가
+	
+3)
+	2) 기능을 추가하고 다시 3으로 시작
+	
+
+3-1)
+	search_mapper
+	14번째줄 추가
+	
+3-2)
+	BoardDAO.java
+	31번째줄 추가
+
+3-3)
+	BoardDAOImpl.java
+	66번째줄 추가
+	
+3-4)
+	BoardService.java
+	33번째줄 추가
+	
+3-5)
+	BoardServiceImpl.java
+	144번째줄 추가
+	
+3-6)
+	UserController.java
+	35번째줄 추가
+	
+4)
+	Search기능을 UserController.java에서
+	SearchController로 빼내는게 좋을거같은데
+	나중에 의견취합해서 하도록하겠습니다
+	
+
+5)
+
+	해쉬태그와 아이디로 검색 기능 구현완료
+	해쉬태그로 검색시 #를 붙이고 검색하면 검색됩니다
+	태그를 여러개 입력해도 검색을 할수있습니다
+	태그는 #로 구분짓습니다
+	
+6)
+	가로세로 비율 망치지않고 800*600유지
+	main.css
+	68번째줄
+	object-fit 추가
+	
+6-2)
+	board_list.jsp
+	47번째줄 수정
+	
+
+7)
+	회원 가입 중복 체크기능
+
+7-1)
+	checkUserIdExist 삭제
+	user_mapper , userDAO , UserDAOImpl , UserService, UserServiceImpl 에서 삭제함
+
+7-2)
+	user_mapper.xml
+	65번째줄
+	중복체크 구문 추가
+
+7-3)
+	UserDAO , UserDAOImpl , UserService, UserServiceImpl /* 0723김우주 */ 주석 참고
+	
+7-4)
+	UserController
+	160번째줄 주석달린줄 추가
+	
+7-5)
+	join.jsp
+	17번째줄 제이쿼리 추가구문추가
+	32번째줄 주석달린줄 추가
+	78번째줄 ajax 스크립트구문 추가
+	
+8)
+	회원가입창 더 매끄럽게 수정
+	
+8-1)
+	header.jsp
+	126번째줄 수정
+	회원가입창 가운데로 오게끔함
+	
+8-2)
+	알러트글 삭제함
+	8-1에 추가되어있어서 위치 기재안함
+	
+9)
+	회원가입 창 더 매끄럽게 수정
+	-발리데이션 에러가 발생할시
+	placeholder 태그 내부로 들어가게끔 수정했습니다
+	
+9-1)
+	join.jsp
+	23번째 주석줄 삽입
+	
+9-2)
+	join.jsp
+	18번째줄
+	style코드 삽입
+	
+9-3)
+	join.jsp
+	68,76,81,86,91,96 번째줄 class="er" 삽입
+	
+10)
+	비밀번호 확인 커스텀발리데이션으로 추가중에 야식먹으러감
+
+
+-------------------------------------
+	
+--0724
+
+1)
+	전재영씨 파일 합체
+	
+2)
+	board_detail.jsp
+	84번째줄 주석 추가
+	-댓글삭제
+	
+3)
+	BoardController.java
+	173번째출 댓글없애기추가
+	
+4)
+	이닛바인더를 그냥사용할시
+	모든전역변수에 이닛바인더가 먹히게되어 수정하였습니다
+	
+
+-- 자고일어나서 기능추가해야할사항
+팔로우기능 - 손승기완료
+비밀번호 , 비밀번호확인 유효성검사 6)
+댓글 번호 자동화 7)
+댓글 글쓴이 자동화 8)
+유효성검사 문구 더 매끄럽게 9)
+관리자페지이 10)
+글삭제시 댓글있으면 삭제가안됨 - 5)
+
+5)
+	 글삭제시 댓글비워주기 추가
+	reply_mapper.xml 32번째줄
+
+	
+5-2)
+	Reply-DAO,DAOImpl,Service,ServiceImpl 구문 추가
+
+5-3)
+	BoardController.java
+	89번째줄 추가
+	
+6)
+	비밀번호 , 비밀번호확인 유효성검사
+
+6-1)
+	UserCustomValidator 추가
+	
+6-2)
+	UserController.java
+	170번째줄
+	
+6-3)
+	custom_vali.properties
+	4,5번째 줄 추가
+	
+6-4)
+	수정페이지에서발리데이션 적용
+	UserController.java
+	92번째줄 수정
+	
+7)
+	댓글번호 자동화
+	
+7-1)
+	reply_mapper.xml
+	40번째줄 추가
+	
+7-2)
+	ReplyDAO
+	20번째줄
+	ReplyDAOImpl
+	38번째줄
+	ReplyServiceImpl
+	22~39줄
+7-3)
+	view딴
+	replyInsert.jsp
+	40번째줄
+	
+8)
+	댓글 글쓴이 자동화
+	replyInsert.jsp
+	41번째줄
+	<form:input type="hidden" path="id" class="input" value="${loginUser.id }"/>
+	으로 수정
+	
+9)
+	유효성 검사 수정
+9-1)
+	custom_vali.properties 수정
+	
+9-2)
+	UserDTO.java
+	28, 29번째줄
+	@NotBlank
+	@Email
+	추가
+	
+9-3)
+	join.jsp
+	31,48번째 줄 수정
+	127번째줄		alert(result); 삭제
+	
+10)
+	UserCustomValidator.java
+	19번째줄 이퀄스로 수정
+	
+11)
+	회원가입 안되던버그 수정
+	join.jsp
+	138~142번째줄 수정
+	
+12)
+	전체글 보기에서는 전체공개 글만 볼수 있도록 수정
+	
+13)
+	글번호 자동화 따로추가
+	board_mapper.xml
+	5번째줄 주석참조
+	
+13-2)
+	BoardDAO,BoardDAOImpl 0724김우주 주석
+	BoardService 37번째줄 수정
+
+14)
+	친구 글 보기에는
+	팔로우한 친구 글만 (친구공개 및 전체공개글) 볼 수 있도록 수정
+	board_mapper.xml
+	44번째줄 수정
+	
+15)
+	조태정씨 파일 합치기
+	
+16) 
+	전재영씨 파일합치기
+	-리소스폴더내 이미지
+	
+17)
+	board_list 원본 백업
+	원본에서 153번째줄 수정

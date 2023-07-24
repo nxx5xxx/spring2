@@ -38,20 +38,28 @@ public class LikeController {
 	}
 	
 	@GetMapping("/disLike.do")
-	public void disLike(@RequestParam("no") int no,LikeDTO likeDto) {
+	public void disLike(@RequestParam("no") int no,@RequestParam("id") String id,LikeDTO likeDto) {
 		likeService.disLike(no);
+		likeService.deleteLikeFromId(no, id);
 		
 	}
 	
 	
 	//펑션 안넣고 c:if 좋아요 0보다 클경우 스크립트시작으로 하면될듯
 	@GetMapping("/likeList.do")
-	@ResponseBody 
+	@ResponseBody
 	public List<LikeDTO> likeList(@RequestParam("no") int no){
+		
 		List<LikeDTO> likeList = likeService.likeListInBoard(no);
 		return likeList;
 	}
 
+	@GetMapping("/likeCheck.do")
+	@ResponseBody
+	public int likeCheck(@RequestParam int no,@RequestParam String id) {
+		
+		return likeService.likeCheck(no,id);
+	}
 	
 	
 	

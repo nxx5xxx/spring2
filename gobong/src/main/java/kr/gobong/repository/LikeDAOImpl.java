@@ -36,4 +36,13 @@ public class LikeDAOImpl implements LikeDAO{
 	public List<LikeDTO> likeListInBoard(int no) {
 		return sqlSessionTemplate.selectList("like1.likeListInBoard", no);
 	}
+	@Override
+	public int likeCheck(LikeDTO likeDto) {
+		return sqlSessionTemplate.selectOne("like1.likeCheck", likeDto);
+	}
+	@Override
+	public void deleteLikeFromId(LikeDTO likeDto) {
+		sqlSessionTemplate.delete("like1.deleteLikeFromId", likeDto);
+		
+	}
 }

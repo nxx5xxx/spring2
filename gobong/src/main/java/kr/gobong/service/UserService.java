@@ -10,8 +10,6 @@ public interface UserService {
 
 	public UserDTO getUserTest(String id);
 
-	public boolean checkUserIdExist(String id);
-
 	public void addUserInfo(UserDTO joinUserDto);
 	
 	public void getUserLogin(UserDTO tmpUserLogin);	//로그인
@@ -22,5 +20,17 @@ public interface UserService {
 	
 	public List<UserVO> getUserProfile(String id);	//나의 프로필 불러오기
 	/* 0719 손승기 */
+	
+	/* 조태정0721 */
 	public void userDel(String id); //회원탈퇴
+	
+	public List<UserVO> searchUser(String id); //회원 검색
+	/* 조태정0721 */
+	
+	/* 0723김우주 */
+	//아이디 중복체크
+	public int duplicationCheckId(String id);
+		
+	/* 0723김우주 */
+	
 }

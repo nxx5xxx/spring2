@@ -66,9 +66,7 @@
 						<div class="field">
 							<div class="text-right">
 								<form:button class="button is-success is-light">수정하기</form:button>
-								<!-- 0721 손승기 -->
 								<a href="javascript:history.go(-1)" class="button is-primary is-light">뒤로가기</a>
-								<!-- 0721 손승기 -->
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="${path1 }/user/userDel?id=${userInfo.id}" class="button is-danger is-light">탈퇴</a>
 							</div>

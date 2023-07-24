@@ -22,7 +22,15 @@
 	<select id="likeListInBoard" parameterType="java.lang.Integer" resultType="kr.gobong.domain.LikeDTO">
 		select * from like1 where no=#{no}
 	</select>
-	
+
 	<!-- //김우주0720 -->
+	<!-- 김우주0721 -->
+	<select id="likeCheck" parameterType="kr.gobong.domain.LikeDTO" resultType="java.lang.Integer">
+		select count(*) from like1 where no=#{no} and id=#{id}
+	</select>
+	
+	<delete id="deleteLikeFromId" parameterType="kr.gobong.domain.LikeDTO">
+		delete from like1 where no=#{no} and id=#{id}
+	</delete>
 </mapper>
 

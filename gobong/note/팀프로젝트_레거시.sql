@@ -91,9 +91,11 @@ create table like1 (no number ,id varchar2(30) , upcheck number default 0 ,forei
 
 commit;
 
-
+-- 댓글 테이블 추가
+create table reply (rno number primary key, no number, id varchar2(30), comment1 varchar2(500),
+    foreign key(no) references board1(no), foreign key(id) references user1(id));
 ----------------------------------------------------------------------------------------------------
--- 셀렉트구문
+-- 테이블구문
 
 --유저
 select * from user1;
@@ -109,11 +111,26 @@ select pw from user1 where id = 'test1';
 
 --보드
 select * from board1;
+-- 좋아요시 좋아요 개수 올라가게끔
 update board1 set up=up+1 where no=8;
-commit;
-desc board1;
---좋아요
 
+
+
+--해쉬태그 글 불러오기
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up 
+    from user1 u , board1 b where u.id=b.id and lower(b.hashtag) Like lower('#%봉%') order by b.no desc;
+
+-- 전체공개글 불러오기
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up, (select count(*) from reply where no = b.no) as reply_cnt from user1 u inner join board1 b on u.id=b.id where b.prv=0 order by b.no desc;
+-- 친구공개글 불러오기
+select DISTINCT b.no, u.name, b.id as id, u.img, b.content, b.img1, b.hashtag, b.regdate
+		from board1 b, follows f, user1 u 
+		where b.id=f.following_id and u.id=f.id and u.id='test1' and b.prv<=1 order by b.regdate desc;
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up, (select count(*) from reply where no = b.no) as reply_cnt from user1 u inner join board1 b on u.id=b.id order by b.no desc;
+        select * from board1;
+        
+select no from (select * from board1 order by no desc) where rownum=1;
+--좋아요
 select * from like1;
 -- 좋아요 해당 아이디의 좋아요 삭제 delete from like1 where no=2 and id='test1';
 desc like1;
@@ -124,6 +141,14 @@ select * from like1 where no=2;
 -- 좋아요누른사람들 사진과 아이디 갖고오기
 select u.id as id, u.img from like1 l , user1 u where l.id = u.id and no=2;
 
+-- delete from like1 where no=2 and id='test1';
+select count(*) from like1 where no=2 and id='test1';
+delete from like1 where no=2 and id='test1';
+
+
+--댓글
+-- 글삭제시 댓글도 삭제되게끔
+delete from reply where no=7;
 --------------------------------------------------------------------------------------------------------------
 --인서트구문
 --회원가입
@@ -139,6 +164,8 @@ insert into user1 values('test3','테스트유저','1234','dddd@test.com','010-0
 -- 더미팔로워
 insert into follows values('test1','test2');
 insert into follows values('test1','test3');
+select * from follows;
+commit;
 
 --더미게시글 (업체크 없앤후)
 insert into board1 values (1, 'test1', '테스트내용1', '#해시태그', default, default, 'test1.jpg', 'img2.png', 'img3.png', default);
@@ -171,8 +198,27 @@ commit;
 select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc;
 select * from board1;
 
-create table reply (rno number primary key, no number, id varchar2(30), comment1 varchar2(500), foreign key(no) references board1(no), foreign key(id) references user1(id));
+
 commit;
-select * from like1;
+
 select * from board1;
 select * from user1;
+commit;
+
+commit;
+
+select * from reply;
+delete from reply where no=#{no};
+commit;
+
+select * from like1;
+select rno from reply order by rno desc;
+
+select * from user1;
+desc user1;
+
+insert into user1(id,name,pw,email,tel,regdate,img) values('test7','김김김','1234','ddd@adad.com','010-0000-0000',default,default);
+commit;
+
+select * from board1;
+
