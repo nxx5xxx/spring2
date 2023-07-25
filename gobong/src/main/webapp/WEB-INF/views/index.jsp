@@ -15,11 +15,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
   <title>main</title>
 </head>
 <body>
-<c:import url="./header.jsp" />
+<c:import url="/WEB-INF/views/header.jsp" />
   <div class="container">
     <div class="card-wrap">
       <div class="card">
@@ -145,23 +146,30 @@
 	              <p class="subtitle is-6">@admin</p>
 	            </div>
 	          </div>
-       		<figure class="image is-4by3">
-				<img class="obfit" src="${data_path }/img/coffee.jpg" alt="글사진">
+	         <h2 style="font-size:20px;">◆ 테이블설계도</h2>
+	         <figure class="image is-4by3">
+	         	<img class="obfit" src="${data_path }/img/Perd.png" alt="글사진">
 			</figure>
+	        <h2 style="font-size:20px;">◆ 논리적ERD</h2>
        		<figure class="image is-4by3">
-				<img class="obfit" src="${data_path }/img/coffee.jpg" alt="글사진">
+				<img class="obfit" src="${data_path }/img/Lerd.png" alt="글사진">
 			</figure>
+			<h2 style="font-size:20px;">◆ 물리적ERD</h2>
+       		<figure class="image is-4by3">
+				<img class="obfit" src="${data_path }/img/Table.png" alt="글사진">
+			</figure>
+			<h2 style="font-size:20px;">◆ 프로젝트구성도</h2>
        		<figure class="image is-4by3">
 				<img class="obfit" src="${data_path }/img/coffee.jpg" alt="글사진">
 			</figure>
           	<hr>
-            <p style="color: blue;"> #고봉 #설계 #개념적 #논리적 #물리적 #클래스 #구성 </p>
+            <p style="color: blue;"> #고봉 #설계 #논리적 #물리적 #클래스 #구성 </p>
             <time datetime="2023-7-24">11:09 AM - 24 July 2023</time>
           </div>
         </div>
       <br>
     </div> <!-- card-wrap -->
   </div> <!-- container -->
-<c:import url="./footer.jsp" />
+<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

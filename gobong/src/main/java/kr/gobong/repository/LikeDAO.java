@@ -2,6 +2,7 @@ package kr.gobong.repository;
 
 import java.util.List;
 
+import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.LikeDTO;
 
 public interface LikeDAO {
@@ -12,4 +13,5 @@ public interface LikeDAO {
 	public List<LikeDTO> likeListInBoard(int no);
 	public int likeCheck(LikeDTO likeDto);
 	public void deleteLikeFromId(LikeDTO likeDto);
+	public List<BoardDTO> myLikeList(String id);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.ReplyDTO;
 import kr.gobong.repository.BoardDAO;
 import kr.gobong.repository.ReplyDAO;
@@ -50,4 +51,14 @@ public class ReplyServiceImpl implements ReplyService {
 	public void deleteReplyForBoard(int no) {
 		replyDAO.deleteReplyForBoard(no);
 	}
+	
+	//이재호0725
+	//내가 쓴 댓글보기
+	@Override
+	public List<BoardDTO> myReply(String id){
+		List<BoardDTO> myReply = replyDAO.myReply(id);
+		return myReply;
+	}
+	
+	
 }

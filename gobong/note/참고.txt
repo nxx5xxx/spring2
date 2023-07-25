@@ -14,3 +14,10 @@ HomeController에서
 return값 index에서 home으로 변경후 런온서버 해보시면돼요
 
 
+글자수 체크하는 사이트
+
+http://trsketch.dothome.co.kr/page_rVsN24
+
+멀티파트 리졸버 참고
+
+https://jihwan-study.tistory.com/83

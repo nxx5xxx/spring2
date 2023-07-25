@@ -15,68 +15,132 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${data_path }/css/main.css">
-	<!-- 0720손승기 -->
-	<link rel="stylesheet" href="${data_path }/css/profile.css">
-	<!-- 0720손승기 -->
     <title>Document</title>
-    <style>
-    
-    </style>
+	<link rel="stylesheet" href="${data_path }/css/profile.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 </head>
 <body>
-<c:import url="../header.jsp" />
+	<c:import url="/WEB-INF/views/header.jsp" />
 <div class="container">
-<div class="card-wrap">
-  <article class="media">
-    <div class="media-left">
-      <figure class="image is-128x128">
-        <img id="profile_img" src="${data_path }/upload/${userProfile[0].img }" alt="profileImage" style="">
-      </figure>
-    </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>${userProfile[0].name }</strong> <small>@${userProfile[0].id }</small> <!-- <small>31m</small> -->
-          <br>
-          여기에 자기소개 넣으면 좋을것같아요(user1 테이블에 자기소개컬럼추가하기?(나중에))<br>
-          밑에는 자신이 작성한 게시글들 이미지 나오게하고(약간 인스타처럼 한 행에 3개or4개) 이미지 클릭하면 게시글 상세보기로 들어가게 하면 좋을듯.
-        </p>
-      </div>
-      <div>
-      	<a href="${path }/user/mypage">정보 수정</a>
-      </div>
-    </div>
-  </article>
-      <!-- 0720 손승기 게시글이미지 영역 -->
-   <div class="card-wrap" id="board_wrap">
-      <c:forEach var="board" items="${userProfile}">
-         <a href="${path }/board/boarddetail?no=${board.no}"><img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview"></a>
-      </c:forEach>      
-   </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item" aria-label="reply">
-            <span class="icon is-small">
-              <i class="fas fa-reply" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="retweet">
-            <span class="icon is-small">
-              <i class="fas fa-retweet" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="like">
-            <span class="icon is-small">
-              <i class="fas fa-heart" aria-hidden="true"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
-	<!-- 0720 손승기 게시글이미지 영역 -->
+	<div class="card-wrap">
+	  <article class="media">
+	    <div class="media-left">
+	      <figure class="image is-128x128">
+	        <img id="profile_img" src="${data_path }/upload/${userProfile[0].img }" alt="profileImage" style="border-radius:50%;">
+	      </figure>
+	    </div>
+	    <div class="media-content">
+	      <div class="content">
+	        <p id="my_introduce">
+	          <strong>${loginUser.name }</strong> <small>@${loginUser.id }</small><br> <!-- <small>31m</small> -->
+	          자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개
+	        </p>
+	        
+	      </div>
+	      <!-- 0721 손승기 -->
+	      <div>
+	      <c:if test="${loginUser.id == userProfile[0].id }">
+	      	<a href="${path }/user/mypage" class="button">정보 수정</a>
+	      </c:if>
+	      <!-- href="${path }/follows/followingList?id=${userProfile[0].id}" -->
+	      <!-- href="${path }/follows/followerList?id=${userProfile[0].id}" -->
+	      	<a class="followCtn" onclick="followingList()"><strong>팔로잉</strong>&nbsp;<strong>${followingCnt }</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      	<a class="followCtn" onclick="followerList()"><strong>팔로워</strong>&nbsp;<strong>${followerCnt }</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      	<c:if test="${loginUser.userLogin == true && loginUser.id != userProfile[0].id }">
+	      	<c:choose>
+	      		<c:when test="${empty followerList}">
+	      			<a href="${path }/follows/doFollow?followingId=${userProfile[0].id}&name=${userProfile[0].name}" class="doFollow"><strong>팔로우 하기 | </strong></a>
+	      		</c:when>
+	      		<c:when test="${!empty followingList }">
+	      			<a href="${path }/follows/unFollow?followingId=${userProfile[0].id}&name=${userProfile[0].name}" class="doFollow"><strong>팔로우 취소 | </strong></a>
+	      		</c:when>
+	      	</c:choose>
+	      	</c:if>
+	      </div>
+	      <!-- 0721 손승기 -->
+	    </div>
+	  </article>
+	      <!-- 0720 손승기 게시글이미지 영역 -->
+		<div class="card-wrap" id="board_wrap">
+			<c:forEach var="board" items="${userProfile}">
+				<a href="${path }/board/boarddetail?no=${board.no}"><img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview"></a>
+			</c:forEach>		
+		</div>
+		<!-- 0720 손승기 게시글이미지 영역 -->
+	      <nav class="level is-mobile">
+	        <div class="level-left">
+	          <a class="level-item" aria-label="reply">
+	            <span class="icon is-small">
+	              <i class="fas fa-reply" aria-hidden="true"></i>
+	            </span>
+	          </a>
+	          <a class="level-item" aria-label="retweet">
+	            <span class="icon is-small">
+	              <i class="fas fa-retweet" aria-hidden="true"></i>
+	            </span>
+	          </a>
+	          <a class="level-item" aria-label="like">
+	            <span class="icon is-small">
+	              <i class="fas fa-heart" aria-hidden="true"></i>
+	            </span>
+	          </a>
+	        </div>
+	      </nav>
+	</div>
+	
+	
+	
 </div>
-</div>
-<c:import url="../footer.jsp" />
+
+	<div id="followingListPopup" style="display:none;">
+		<strong>${userProfile[0].name }님의 팔로잉 목록</strong>
+			<div id="follow-text">
+				<c:forEach var="following" items="${followingList }">
+				<a href="${path }/user/profile?id=${following.following_id}"><h3>${following.following_id }</h3></a>
+				</c:forEach>
+			</div>
+		<!-- <button onclick="listExit()" class="button">나가기</button> -->
+	</div>
+	
+	<div id="followerListPopup" style="display:none;">
+		<strong>${userProfile[0].name }님의 팔로워 목록</strong>
+			<div id="follow-text">
+				<c:forEach var="follower" items="${followerList }">
+				<a href="${path }/user/profile?id=${follower.id}"><h3>${follower.id }</h3></a>
+				</c:forEach>
+			</div>
+		<!-- <button onclick="listExit()" class="button">나가기</button> -->
+	</div>
+<c:import url="/WEB-INF/views/footer.jsp" />
+
+<script>
+	function followingList() {
+		$("#followingListPopup").css("display", "block");
+		if($("#followingListPopup").css("display") == "block") {	//팔로잉 목록창 열려있을때 팔로우 목록창을 누르면 
+			$("#followerListPopup").css("display", "none");			//팔로잉 목록창은 꺼지고 팔로우 목록창이 열림
+		}
+	}
+	function followerList() {
+		$("#followerListPopup").css("display", "block");
+		console.log($("#followerListPopup").css("display"));
+		if($("#followerListPopup").css("display") == "block") {
+			$("#followingListPopup").css("display", "none");
+		}
+	}
+	/* function listExit() {
+		$("#followingListPopup").css("display", "none");
+		$("#followerListPopup").css("display", "none");
+	} */
+	
+	$(document).mouseup(function(e){		// 팔로잉, 팔로우 목록창이 열려있을때 외부영역을 아무곳이나 클릭하면 목록창이 닫힘
+	    if($("#followerListPopup").has(e.target).length === 0 || $("#followingListPopup").has(e.target).length === 0) {
+			$("#followerListPopup").hide();
+			$("#followingListPopup").hide();
+	    }
+	});
+
+</script>
 	
 </body>
 </html>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.ReplyDTO;
@@ -101,7 +102,7 @@ public class BoardController {
 		List<BoardDTO> boardList = boardService.getFriendBoardList(id);
 		model.addAttribute("boardList", boardList);
 		
-		return "board/board_friendlist";
+		return "board/board_list";
 	}
 	 
 	/* 0719 조태정 */
@@ -178,6 +179,17 @@ public class BoardController {
 		replyService.deleteReply(rno);
 		return "redirect:/board/boarddetail?no="+no;
 	}
+	
+	/* 김우주0724 */
+	//댓글쓰기 ajax로 사용
+	@PostMapping("/replyInsert.do")
+	@ResponseBody
+	public void replyInsertAjax(@ModelAttribute("replyDto") ReplyDTO replyDto) {
+		replyService.addReply(replyDto);
+	}
+	
+	
+	/*//김우주0724 */
 	
 	
 	//커스텀밸리데이션

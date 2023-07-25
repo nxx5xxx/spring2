@@ -75,7 +75,10 @@ span:hover {
 						<div class="navbar-item has-dropdown is-hoverable">
 							<a class="navbar-link">My Page</a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item" href="like_list">좋아요 ♥</a>
+								<!-- 0724이재호 -->			
+								<a class="navbar-item" href="${path1 }/user/myLikeList">😻♥</a>
+								<a class="navbar-item" href="${path1 }/user/myReply ">내가 쓴 댓글</a>
+								<!-- //0724 이재호 -->
 								<!-- 0719 손승기 -->
 								<a href="${path1 }/user/profile?id=${loginUser.id}"
 									class="navbar-item"><img src="">프로필</a> <a

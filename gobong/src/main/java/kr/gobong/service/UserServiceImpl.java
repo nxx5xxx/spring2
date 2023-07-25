@@ -124,4 +124,36 @@ public class UserServiceImpl implements UserService {
 	}
 	/* 0723김우주 */
 	
+	/* 0725김우주 */
+	@Override
+	public void deleteReplyForUserDelete(String id) {
+		userDao.deleteReplyForUserDelete(id);
+	}
+	@Override
+	public void deleteLikeForUserDelete(String id) {
+		userDao.deleteLikeForUserDelete(id);
+	}
+	@Override
+	public List<Integer> selectBoardNoForUserDelete(String id){
+		return userDao.selectBoardNoForUserDelete(id);
+	}
+	@Override
+	public void deleteLikeForUserDeleteToBoard(int no) {
+		userDao.deleteLikeForUserDeleteToBoard(no);
+	}
+	@Override
+	public void deleteReplyForUserDeleteToBoard(int no) {
+		userDao.deleteReplyForUserDeleteToBoard(no);	
+	}
+	
+	@Override
+	public void deleteBoardForUserDelete(String id) {
+		userDao.deleteBoardForUserDelete(id);
+	}
+	@Override
+	public void deleteFollowsForUserDelete(String id) {
+		userDao.deleteFollowsForUserDelete(id);						
+	}
+	/* 0725김우주 */
+	
 }

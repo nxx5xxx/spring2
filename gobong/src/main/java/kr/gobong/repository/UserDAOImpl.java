@@ -65,4 +65,35 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSessionTemplate.selectOne("user1.duplicationCheckId", id);
 	}
 	/* 0723김우주 */
+	
+	/* 0725김우주 */
+	@Override
+	public void deleteReplyForUserDelete(String id) {
+		sqlSessionTemplate.delete("deleteUser.deleteReplyForUserDelete", id);
+	}
+	@Override
+	public void deleteLikeForUserDelete(String id) {
+		sqlSessionTemplate.delete("deleteUser.deleteLikeForUserDelete", id);
+	}
+	@Override
+	public List<Integer> selectBoardNoForUserDelete(String id){
+		return sqlSessionTemplate.selectList("deleteUser.selectBoardNoForUserDelete", id);
+	}
+	@Override
+	public void deleteLikeForUserDeleteToBoard(int no) {
+		sqlSessionTemplate.delete("deleteUser.deleteLikeForUserDeleteToBoard", no);
+	}
+	@Override
+	public void deleteReplyForUserDeleteToBoard(int no) {
+		sqlSessionTemplate.delete("deleteUser.deleteReplyForUserDeleteToBoard", no);	
+	}
+	@Override
+	public void deleteBoardForUserDelete(String id) {
+		sqlSessionTemplate.delete("deleteUser.deleteBoardForUserDelete", id);
+	}
+	@Override
+	public void deleteFollowsForUserDelete(String id) {
+		sqlSessionTemplate.delete("deleteUser.deleteFollowsForUserDelete", id);						
+	}
+	/* 0725김우주 */
 }

@@ -18,8 +18,8 @@
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap"
 	rel="stylesheet">
 <title>Document</title>
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 <style>
 .warap {
 	width: 800px;

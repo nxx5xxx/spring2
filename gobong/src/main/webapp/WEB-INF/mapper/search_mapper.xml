@@ -6,7 +6,7 @@
 	<!-- 회원 검색 -->
  	<select id="searchUser" parameterType="java.lang.String" resultType="kr.gobong.domain.UserVO">
  	<![CDATA[
- 		SELECT img, id FROM user1 WHERE id LIKE #{id}
+ 		SELECT img, id,name FROM user1 WHERE id LIKE #{id}
  	]]>
  	</select>
 	

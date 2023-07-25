@@ -42,13 +42,15 @@
 	<!-- 0719 조태정 test1이 팔로우한 글 목록 보기(친구 게시글) -->
 	<!-- 김우주0724 -->
 	<!-- 전체공개 및 친구공개만 볼 수 있도록 수정 -->
+	<!-- 김우주0725 -->
 	<select id="getFriendBoardList" parameterType="java.lang.String" resultType="kr.gobong.domain.BoardDTO">
 		<![CDATA[
-		select DISTINCT b.no, u.name, b.id as id, u.img, b.content, b.img1, b.hashtag, b.regdate
+		select DISTINCT b.no, u.name, b.id as id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up, (select count(*) from reply where no = b.no) as reply_cnt
 		from board1 b, follows f, user1 u 
 		where b.id=f.following_id and u.id=f.id and u.id='test1' and b.prv<=1 order by b.regdate desc
 		]]>
 	</select>
+	<!-- 김우주0725 -->
 	<!-- 김우주0724 -->	 
 	<!-- 0719전재영 -->
 	 	<!-- 글 상세보기 -->

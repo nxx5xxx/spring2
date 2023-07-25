@@ -44,4 +44,15 @@
       ]]>
 	</select>
 	<!-- //0724김우주 -->
+	
+	<!-- 0725이재호 -->
+	<!-- 내가 쓴 댓글 보기 -->
+	<select id="myReply" parameterType="java.lang.String" resultType="kr.gobong.domain.BoardDTO">
+		<![CDATA[
+			select distinct b.no,b.id,b.content,b.hashtag,b.up,b.regdate,b.img1,b.img2,b.img3,b.prv 
+			from board1 b, reply r where b.no= r.no and r.id=#{id}
+		]]>
+	
+	</select>
+	<!-- 0725이재호 -->
 </mapper>	 

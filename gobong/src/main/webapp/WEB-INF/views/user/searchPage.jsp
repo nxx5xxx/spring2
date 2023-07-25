@@ -15,54 +15,81 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${data_path }/css/main.css">
-    <title>Document</title>
+<link rel="stylesheet" href="${data_path }/css/main.css">
+<link rel="stylesheet" href="${data_path }/css/footer.css">
+    <title>검색 결과</title>
+<style>
+.card {
+	margin-bottom: 40px;
+}
+</style>
 </head>
 <body>
 <c:import url="../header.jsp" />
-<div class="box">
+<!-- 0724 박지현 -->
+<div class="container">
+<div class="card-wrap">
   <article class="media">
     <div class="media-left">
-      <figure class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+        <figure class="image is-128x128">
+        <c:if test="${empty search[0].img }">
+        <img id="profile_img" src="${data_path }/img/unknown.png" alt="profileImage" style="">
+        </c:if>
+        <c:if test="${!empty search[0].img }">
+        <img id="profile_img" src="${data_path }/upload/${search[0].img }" alt="profileImage" >
+        </c:if>
       </figure>
     </div>
     <div class="media-content">
       <div class="content">
-        <p>
-          <strong>${userProfile[0].name }</strong> <small>@${userProfile[0].id }</small> <!-- <small>31m</small> -->
-          <br>
-          여기에 자기소개 넣으면 좋을것같아요(user1 테이블에 자기소개컬럼추가하기?(나중에))<br>
-          밑에는 자신이 작성한 게시글들 이미지 나오게하고(약간 인스타처럼 한 행에 3개or4개) 이미지 클릭하면 게시글 상세보기로 들어가게 하면 좋을듯.
-        </p>
+        <p><strong>${search[0].name }</strong> <small>@${search[0].id }</small></p>
+        <c:if test="${!empty search[0].name }">
+          <pre style="background-color: white;">
+여기에 자기소개 넣으면 좋을것같아요(user1 테이블에 자기소개컬럼추가하기?(나중에))
+밑에는 자신이 작성한 게시글들 이미지 나오게하고(약간 인스타처럼 한 행에 3개or4개)
+이미지 클릭하면 게시글 상세보기로 들어가게 하면 좋을듯.
+          </pre>
+        </c:if>
+        <c:if test="${empty search[0].name }">
+	        <pre style="background-color: white;">
+검색과 일치하는 사용자가 없습니다
+	          </pre>
+        </c:if>
       </div>
       <div>
-      	<a href="${path }/user/mypage">정보 수정</a>
+     	  <c:if test="${loginUser.id == userProfile[0].id }">
+	      	<a href="${path }/user/mypage" class="button">정보 수정</a>
+	      </c:if>
       </div>
-	<c:forEach var="board" items="${userProfile}">
-		<h2>${board.img1 }</h2>
-	</c:forEach>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item" aria-label="reply">
-            <span class="icon is-small">
-              <i class="fas fa-reply" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="retweet">
-            <span class="icon is-small">
-              <i class="fas fa-retweet" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="like">
-            <span class="icon is-small">
-              <i class="fas fa-heart" aria-hidden="true"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
     </div>
   </article>
+    <div class="card-wrap" id="board_wrap" style="margin-top:20px;">
+      <c:forEach var="board" items="${userProfile}">
+      	<div class="card">
+  			<div class="card-image">
+    			<figure class="image is-4by3">
+         			<a href="${path }/board/boarddetail?no=${board.no}"><img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview"></a>
+         		</figure>
+         	</div>
+         		<div class="card-content">
+    				<div class="media">
+     		 			<div class="media-left">
+        					<figure class="image is-48x48">
+        						<a href="${path }/board/boarddetail?no=${board.no}"><img id="user_img" src="${data_path }/upload/${userProfile[0].img }" alt="작성자사진"></a>
+        					</figure>
+        				</div>
+        				<div class="media-content">
+        					<p class="title is-4">${board.name}</p>
+							<p class="subtitle is-6">${board.id}</p>
+      					</div>
+      				</div>     				
+      			</div>
+    		</div>
+      </c:forEach>
+	</div>
 </div>
+</div>
+<c:import url="../footer.jsp" />
+<!-- 0724 박지현 -->
 </body>
 </html>

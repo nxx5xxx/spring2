@@ -32,5 +32,13 @@ public interface UserService {
 	public int duplicationCheckId(String id);
 		
 	/* 0723김우주 */
-	
+	/* 0725김우주 */
+	public void deleteReplyForUserDelete(String id);
+	public void deleteLikeForUserDelete(String id);
+	public List<Integer> selectBoardNoForUserDelete(String id);
+	public void deleteLikeForUserDeleteToBoard(int no);
+	public void deleteReplyForUserDeleteToBoard(int no);
+	public void deleteBoardForUserDelete(String id);
+	public void deleteFollowsForUserDelete(String id);
+	/* 0725김우주 */
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.LikeDTO;
 
 @Repository
@@ -45,4 +46,10 @@ public class LikeDAOImpl implements LikeDAO{
 		sqlSessionTemplate.delete("like1.deleteLikeFromId", likeDto);
 		
 	}
+	//내가 좋아요 누른 글 목록 0724이재호
+	@Override
+	public List<BoardDTO> myLikeList(String id) {
+		return sqlSessionTemplate.selectList("like1.myLikeList",id);
+	}
+	//내가 좋아요 누른 글 목록 0724이재호
 }

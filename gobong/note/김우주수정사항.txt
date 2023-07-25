@@ -609,3 +609,146 @@ alter table board1 drop column upcheck;
 17)
 	board_list 원본 백업
 	원본에서 153번째줄 수정
+
+18)
+	박지현씨 파일합치기
+	
+19)
+	이재호씨 파일합치기
+	
+20)
+	board_detail.jsp
+	댓글등록부분 ajax로 추가
+	
+21)
+	board_detail.jsp
+	댓글 창 위치 변경및 디자인 변경
+	
+22)
+	board_detail.jsp
+	댓글 등록시 새로고침없도록 수정함
+	
+23)
+	board_detail.jsp
+	댓글 최대 글자수(Oracle db내 varchar2(500)이므로)
+	를 넘으면 메세지가 가도록 설정
+
+#### board_detail.jsp 위치와 변경점이 너무많고
+	저녁에 작업한거라 따로 주석처리를 하지않았습니다
+
+24)
+	profile.css
+	29번째줄
+	footer 부분 주석처리
+
+25)	
+	a태그 span태그등등을 스타일로 묶어버린거 빼내는작업중
+-------------------------------------------
+
+
+
+--0725
+1)
+	모든 jsp영역에 footer와 css header를 달았습니다
+	
+2)
+	profile.css 수정
+	통복붙하세요
+	
+3)
+	친구글 목록보기를 따로 페이지만드는거 비효율적이라페이지는 하나에서 보이도록 합쳤습니다
+	
+3-1)
+	board_mapper.xml
+	45번째줄 수정
+	
+3-2)
+	보드컨트롤러 105번째줄
+	return값
+			return "board/board_list"; 로 수정
+			
+3-3)
+	board_friendlist.jsp
+	백업폴더로 옮김
+	
+4)
+	login.jsp 백업폴더로 옮겼습니다
+	
+5)
+	board_detail.jsp 스타일수정
+	
+6)
+	board_edit.jsp
+	버그수정
+	
+7)
+	승기씨 파일 합침
+	
+8)
+	board_detail.jsp
+	스크립트 및 div태그 내 수정
+	
+9)
+	재호씨 파일합치기
+	, reply_mapper.xml 구문수정
+	
+10)
+	게시글 없는 사람은 프로필 조회 안 됨 수정
+	
+10-1)
+	search_mapper.xml
+	9번줄 구문수정
+	
+10-2)
+	searchPage.jsp
+	수정
+	
+11)
+	승기씨 프로필수정 합침
+	
+12)
+	댓글쓰기페이지 활용
+	board_list.jsp
+	133번째줄 85번째줄
+	로그인안됏을때 안되도록도 함
+	
+13)
+	board_list.jsp
+	77번째줄
+	db ||CHR(13)||CHR(10)|| 먹히도록 수정
+	
+14)
+	회원탈퇴시 자신이 작성한 모든테이블을 제거후 탈퇴
+	
+	모든댓글삭제
+	모든 좋아요 삭제
+	글 들의 번호들을 리스트로 불러와서 순회시키며 삭제
+	해당 게시글의 모든 좋아요 삭제
+	해당 게시글의 모든 댓글 삭제
+	모든 게시글 삭제 
+	모든 팔로잉 삭제
+14-1)
+	delete_user.xml추가
+	
+14-2)
+	UserDAO 34번째줄 추가
+	
+14-3)
+	UserDAOImpl
+	69번째줄
+	
+14-4)
+	UserService
+	35번째줄
+
+14-5)
+	UserServiceImpl
+	127번째줄
+	
+14-6)
+	UserController
+	161번째줄
+	
+	
+	
+	

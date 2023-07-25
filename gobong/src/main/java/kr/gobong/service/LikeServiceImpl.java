@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.LikeDTO;
 import kr.gobong.domain.UserDTO;
 import kr.gobong.repository.LikeDAO;
@@ -65,5 +66,11 @@ public class LikeServiceImpl implements LikeService{
 		likeDto.setNo(no);
 		likeDto.setId(id);
 		likeDao.deleteLikeFromId(likeDto);
+	}
+	//내가 좋아요 누른 글 목록 0724이재호
+	@Override
+	public List<BoardDTO> myLikeList(String id) {
+		List<BoardDTO> myLikeList = likeDao.myLikeList(id);
+		return myLikeList;
 	}
 }
