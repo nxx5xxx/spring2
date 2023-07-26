@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.FollowsDTO;
+import kr.gobong.domain.ReplyDTO;
 import kr.gobong.domain.UserDTO;
 import kr.gobong.domain.UserVO;
 import kr.gobong.service.BoardService;
@@ -115,7 +116,7 @@ public class UserController {
 		
 		//나의 프로필 보기
 		@GetMapping("/profile")
-		public String getUserProfile(@RequestParam("id") String id, Model model) {
+		public String getUserProfile(@RequestParam("id") String id, UserDTO userInfo, Model model) {
 			model.addAttribute("id", id);
 			/* 0721 손승기 */
 			int followingCnt = followsService.followingCnt(id);
@@ -132,9 +133,13 @@ public class UserController {
 			System.out.println(followerList);
 			/* 0721 손승기 */
 			List<UserVO> userProfile = userService.getUserProfile(id);
-			
+			System.out.println("userProfile : " + userProfile);
 			model.addAttribute("userProfile", userProfile);
 			
+			List<UserVO> search = userService.searchUser(id);
+			model.addAttribute("search", search);
+			
+			model.addAttribute("userInfo", userInfo);
 			return "user/profile"; 
 		}
 		/* 0719 손승기 */
@@ -186,7 +191,8 @@ public class UserController {
 		/* 김우주0723 해쉬태그인지 아닌지 수정했습니다	*/
 		@GetMapping("/searchUser")
 		public String searchUser(@RequestParam("id") String id, Model model) {
-			if(id.indexOf("#")==-1) {
+			System.out.println(id);
+			if(id.indexOf("#")==-1) { //&& id.indexOf("%23")==-1) {
 				List<UserVO> search = userService.searchUser(id);
 				List<UserVO> userProfile = userService.getUserProfile(id);
 				
@@ -225,10 +231,12 @@ public class UserController {
 		
 		
 		/*이재호0725*/
+		/* 0726김우주 댓글수정했습니다*/
 		//내가 쓴 댓글보기
 		@GetMapping("/myReply")
 		public String myReply(Model model) {
-			List<BoardDTO> myReply = replyService.myReply(loginUser.getId());
+//			List<BoardDTO> myReply = replyService.myReply(loginUser.getId());
+			List<ReplyDTO> myReply = replyService.myReply(loginUser.getId());
 			model.addAttribute("myReply", myReply);
 			return "user/myReply";
 		}		

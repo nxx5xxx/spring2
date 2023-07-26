@@ -119,7 +119,7 @@
 					          				data: {no:${boardDTO.no}},
 					          				success : function(likeList){
 					          					for(var i=0 in likeList){
-					                                $("#like_result${cnt.count }").append("<a id='like_a"+${cnt.count}+"_"+likeList[i].id+"'href=''>"+likeList[i].id+'님'+"</a>"+"  ");
+					                                $("#like_result${cnt.count }").append("<a id='like_a"+${cnt.count}+"_"+likeList[i].id+"'href='${path}/user/profile?id="+likeList[i].id+"'>"+likeList[i].id+'님'+"</a>"+"  ");
 					                            }
 					          				},
 					          				error : function(){
@@ -129,7 +129,7 @@
 		          				</script>
 								</c:if>
 								<c:if test="${boardDTO.up == 0 }">
-								<p id="like_result${cnt.count }">  </p>
+								<p id="like_result${cnt.count }" style="margin-left: -55px; margin-top: 3px;">  </p>
 								</c:if>
 							</div>
 						</div>
@@ -180,7 +180,12 @@
 							data: {no:no},
 							//async: false
 							complete:function(){
-								$("#like_result"+cnt).append("<a href='' id='like_a"+cnt+"_"+id+"'>"+id+"</a>"+"  ");
+								if(like===0){
+									$("#like_result"+cnt).append("이 글을 좋아하는 사람 <a href='${path}/user/profile?id="+id+"' id='like_a"+cnt+"_"+id+"'>"+id+"님 </a>"+"  ");
+										
+								}else{
+								$("#like_result"+cnt).append("<a href='${path}/user/profile?id="+id+"' id='like_a"+cnt+"_"+id+"'>"+id+"님 </a>"+"  ");
+								}
 								$('.reload_like'+cnt).load(location.href+' .reload_like'+cnt);
 							}
 		          		}); 
@@ -193,7 +198,11 @@
 		          				async:false,
 		          				data:{no:no,id:id},
 		          				complete:function(){
+		          					if(like===0){
+		          						$("#like_result"+cnt).text(" ");
+		          					}
 		          					$("#like_a"+cnt+"_"+id).remove();
+		          					
 		          					$('.reload_like'+cnt).load(location.href+' .reload_like'+cnt);
 		          				}
 		          			});

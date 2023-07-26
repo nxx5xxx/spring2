@@ -21,3 +21,13 @@ http://trsketch.dothome.co.kr/page_rVsN24
 멀티파트 리졸버 참고
 
 https://jihwan-study.tistory.com/83
+
+혹여나
+임포트를 했을시 javax의 Resource를 임포트해오지 못할시
+<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+</dependency>
+
+를 pom.xml에 추가해주시면 됩니다

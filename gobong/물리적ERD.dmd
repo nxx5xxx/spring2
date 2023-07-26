@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="물리적ERD" id="79095DDB-71A3-19A2-02E5-9634AAD2D574" version="3.5">
+<createdBy>201-14</createdBy>
+<createdTime>2023-07-26 05:00:24 UTC</createdTime>
+<ownerDesignName>물리적ERD</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>79095DDB-71A3-19A2-02E5-9634AAD2D574</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="AA2E87CE-5D9A-DF63-FA73-AA5479B23812">
+<designStoragePath>D:\</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

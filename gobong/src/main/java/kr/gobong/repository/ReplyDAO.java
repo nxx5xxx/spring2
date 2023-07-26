@@ -2,7 +2,6 @@ package kr.gobong.repository;
 
 import java.util.List;
 
-import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.ReplyDTO;
 
 public interface ReplyDAO {
@@ -24,6 +23,9 @@ public interface ReplyDAO {
 	
 	//이재호0725
 	//내가 쓴 댓글보기
-	public List<BoardDTO> myReply(String id);
-	
+//	public List<BoardDTO> myReply(String id);
+	/* 0726김우주 */
+	//내가 쓴 댓글보기
+	public List<ReplyDTO> myReply(String id);
+	/* 0726김우주 */
 }

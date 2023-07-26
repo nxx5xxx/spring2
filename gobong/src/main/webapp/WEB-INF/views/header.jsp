@@ -44,11 +44,14 @@ span:hover {
 				</c:otherwise>
 			</c:choose>
 			<div class="level-item" style="margin: 12px;">
-				<form action="${path1 }/user/searchUser" method="get">
+			<!-- 0726김우주 id추가 -->
+				<form action="${path1 }/user/searchUser" method="get" id="searchForm"> <!-- action="${path1 }/user/searchUser" -->
 					<div class="field has-addons">
 						<p class="control">
+							<!-- <input id="searchText" name="id" class="input" type="text"
+								onkeypress="if( event.keyCode == 13 ){gbSearch();}"
+								placeholder="검색어를 입력해 주세요"> -->
 							<input id="searchText" name="id" class="input" type="text"
-								onkeypress="if( event.keyCode == 13 ){gbSearch();return false}"
 								placeholder="검색어를 입력해 주세요">
 						</p>
 						<p class="control">
@@ -187,7 +190,118 @@ span:hover {
   $searchText.addEventListener('click',function(){
     document.querySelector('#hello').style.display = 'block';
   })
+ 
+
+	/* 0726김우주 */
+	//검색폼(전송)
+	//const searchForm = $("#searchForm");
+	const searchForm = document.querySelector("#searchForm");
+	
+	//searchText 검색어 입력(input)
+	//const searchText = $("#searchText");
+	const searchText = document.querySelector("#searchText");
+	
+	//searchList 최근검색어 모여있는거
+	//const searchList = $("#searchList");
+	const searchList = document.querySelector("#searchList");
+	
+	// 검색어 키값
+	const search_Key = "search_Keys";
+	// 최근검색어 배열
+	let searches = new Array();
+	
+	//검색기록 세션에 저장
+	function save_Search(){
+		typeof(Storage) !== sessionStorage.setItem(search_Key,JSON.stringify(searches)) && 'undefined';
+	};
+	
+	// 폼 전송시 발생
+	function transmit_form(e){
+		//e.preventDefault();//전송막는것 테스트때
+		// input창 검색어 값
+//		const newSearchesItem = searchText.val();
+//		searchText.val("");
+		const newSearchesItem = searchText.value;
+		//alert(searchText.value);
+		searchText.value = '';
+		const newSearchesObj = {
+				id : Date.now(),
+				text : newSearchesItem
+		};
+		searches.push(newSearchesObj);
+		save_Search();
+		//${path1 }/user/searchUser
+		//alert("2"+newSearchesItem);
+		$("#searchText").val(newSearchesItem);
+		//document.querySelector("#searchText").value = newSearchesItem;
+		//location.href="${path1 }/user/searchUser?id="+newSearchesItem;
+		//버튼일때만 먹힘
+		//document.searchForm.action = "${path1 }/user/searchUser?id="+newSearchesItem;
+		//document.searchForm.onsubmit;
+	};
+ 	function del_search(e){
+		const search_li = e.target.parentElement;
+		search_li.remove();
+		searches = searches.filter((x) => x.id !== parseInt(search_li.id));
+		save_Search();
+	}; 
+	// 다시받아서 뿌리기
+	function recent_search(newSearch){
+		const {id,text} = newSearch;
+		//태정씨 $newList 와 같은것
+	  	const item = document.createElement('li');
+		// 태정씨 $x 와 같은것
+//		const span = document.createElement('span');
+		const del_btn = document.createElement('span');
+		// 태정시 $xText와 같은것
+//	    const del_btn = document.createTextNode('삭제');
+	    const span = document.createTextNode(text);
+		item.id = id;
+//		span.innerText = text;
+		del_btn.innerText = '삭제';
+//		del_btn.addEventListener("click",del_search);
+		del_btn.addEventListener("click",del_search);
+//		item.appendChild(span);
+//		item.appendChild(del_btn);
+		item.appendChild(del_btn);
+		console.log(text.substring(1));
+
+		const atag = document.createElement("a");
+ 		if(text.indexOf("#")!==-1){
+ 			atag.setAttribute("href","${path1 }/user/searchUser?id=%23"+text.substring(1));
+		}else{
+			atag.setAttribute("href","${path1 }/user/searchUser?id="+text);
+		} 
+		item.appendChild(atag).appendChild(span);
+		
+		
+		//item.appendChild(span);
+		searchList.appendChild(item);
+		
+		
+/* 		let $span = document.querySelectorAll('span');
+		  let $items = document.querySelectorAll('li')
+		  $span[0].addEventListener('click',function(){
+		    this.parentNode.removeChild(this);
+		    $items[0].parentNode.removeChild($items[0]);
+		  }) */
+
+	};	
+
+
+	
+	searchForm.addEventListener('submit',transmit_form);
+	
+	//저장된 세션값 갖고와서 세션값이 null이 아닐경우
+	//그 리스트들 다시 뿌려주는거
+	const saved_Search = JSON.parse(sessionStorage.getItem(search_Key));
+	if(saved_Search!== null){ 
+		searches = saved_Search;
+		saved_Search.forEach(recent_search);
+	}
+/* 0726김우주 */
 </script>
+
 <script>
 $(window).scroll(function(){
 	document.querySelector('#hello').style.display = 'none';

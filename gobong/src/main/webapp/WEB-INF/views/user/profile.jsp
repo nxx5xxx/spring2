@@ -6,6 +6,7 @@
 <!-- 최상위경로 -->
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <c:set var="data_path" value="${pageContext.request.contextPath }/resources" />
+<c:set var="id" value="${loginUser.id }" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,35 +28,33 @@
 	  <article class="media">
 	    <div class="media-left">
 	      <figure class="image is-128x128">
-	        <img id="profile_img" src="${data_path }/upload/${userProfile[0].img }" alt="profileImage" style="border-radius:50%;">
+	        <img id="profile_img" src="${data_path }/upload/${search[0].img }" alt="profileImage" style="border-radius:50%;">
 	      </figure>
 	    </div>
 	    <div class="media-content">
 	      <div class="content">
 	        <p id="my_introduce">
-	          <strong>${loginUser.name }</strong> <small>@${loginUser.id }</small><br> <!-- <small>31m</small> -->
+	          <strong>${search[0].name }</strong> <small>@${search[0].id }</small><br> <!-- <small>31m</small> -->
 	          자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개
 	        </p>
 	        
 	      </div>
 	      <!-- 0721 손승기 -->
 	      <div>
-	      <c:if test="${loginUser.id == userProfile[0].id }">
+	      <c:if test="${loginUser.id == search[0].id }">
 	      	<a href="${path }/user/mypage" class="button">정보 수정</a>
 	      </c:if>
 	      <!-- href="${path }/follows/followingList?id=${userProfile[0].id}" -->
 	      <!-- href="${path }/follows/followerList?id=${userProfile[0].id}" -->
 	      	<a class="followCtn" onclick="followingList()"><strong>팔로잉</strong>&nbsp;<strong>${followingCnt }</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	      	<a class="followCtn" onclick="followerList()"><strong>팔로워</strong>&nbsp;<strong>${followerCnt }</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	      	<c:if test="${loginUser.userLogin == true && loginUser.id != userProfile[0].id }">
-	      	<c:choose>
-	      		<c:when test="${empty followerList}">
-	      			<a href="${path }/follows/doFollow?followingId=${userProfile[0].id}&name=${userProfile[0].name}" class="doFollow"><strong>팔로우 하기 | </strong></a>
-	      		</c:when>
-	      		<c:when test="${!empty followingList }">
-	      			<a href="${path }/follows/unFollow?followingId=${userProfile[0].id}&name=${userProfile[0].name}" class="doFollow"><strong>팔로우 취소 | </strong></a>
-	      		</c:when>
-	      	</c:choose>
+	      	<c:if test="${loginUser.userLogin == true && loginUser.id != search[0].id }">
+	      		<c:if test="${fn:contains(followerList ,id) == false }">
+	      			<a href="${path }/follows/doFollow?followingId=${search[0].id}&name=${search[0].name}" class="doFollow"><strong>팔로우 하기 | </strong></a>
+	      		</c:if>
+	      		<c:if test="${fn:contains(followerList, id)}">
+	      			<a href="${path }/follows/unFollow?followingId=${search[0].id}&name=${search[0].name}" class="doFollow"><strong>팔로우 취소 | </strong></a>
+	      		</c:if>
 	      	</c:if>
 	      </div>
 	      <!-- 0721 손승기 -->
@@ -94,7 +93,7 @@
 </div>
 
 	<div id="followingListPopup" style="display:none;">
-		<strong>${userProfile[0].name }님의 팔로잉 목록</strong>
+		<strong>${search[0].name }님의 팔로잉 목록</strong>
 			<div id="follow-text">
 				<c:forEach var="following" items="${followingList }">
 				<a href="${path }/user/profile?id=${following.following_id}"><h3>${following.following_id }</h3></a>
@@ -104,7 +103,7 @@
 	</div>
 	
 	<div id="followerListPopup" style="display:none;">
-		<strong>${userProfile[0].name }님의 팔로워 목록</strong>
+		<strong>${search[0].name }님의 팔로워 목록</strong>
 			<div id="follow-text">
 				<c:forEach var="follower" items="${followerList }">
 				<a href="${path }/user/profile?id=${follower.id}"><h3>${follower.id }</h3></a>

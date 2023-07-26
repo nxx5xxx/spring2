@@ -22,5 +22,10 @@ public interface ReplyService {
 	
 	//이재호0725
 	//내가 쓴 댓글보기
-	public List<BoardDTO> myReply(String id);
+//	public List<BoardDTO> myReply(String id);
+	
+	/* 0726김우주 */
+	//내가 쓴 댓글보기
+	public List<ReplyDTO> myReply(String id);
+	/* 0726김우주 */
 }

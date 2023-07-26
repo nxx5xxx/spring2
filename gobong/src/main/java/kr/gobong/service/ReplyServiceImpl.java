@@ -54,11 +54,19 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	//이재호0725
 	//내가 쓴 댓글보기
+	/*
+	 * @Override public List<BoardDTO> myReply(String id){ List<BoardDTO> myReply =
+	 * replyDAO.myReply(id); return myReply; }
+	 */
+	
+	
+	/* 0726김우주 */
+	//내가 쓴 댓글보기
 	@Override
-	public List<BoardDTO> myReply(String id){
-		List<BoardDTO> myReply = replyDAO.myReply(id);
-		return myReply;
+	public List<ReplyDTO> myReply(String id){
+		return replyDAO.myReply(id);
 	}
+	/* 0726김우주 */
 	
 	
 }

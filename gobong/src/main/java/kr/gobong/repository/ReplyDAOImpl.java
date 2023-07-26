@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.ReplyDTO;
 
 @Repository
@@ -46,8 +45,16 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	//이재호0725
 	//내가 쓴 댓글보기
+	/*
+	 * @Override public List<BoardDTO> myReply(String id){ return
+	 * sqlSessionTemplate.selectList("reply.myReply", id); }
+	 */
+	
+	/* 0726김우주 */
+	//내가 쓴 댓글보기
 	@Override
-	public List<BoardDTO> myReply(String id){
+	public List<ReplyDTO> myReply(String id){
 		return sqlSessionTemplate.selectList("reply.myReply", id);
 	}
+	/* 0726김우주 */
 }
