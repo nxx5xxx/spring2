@@ -53,10 +53,6 @@
 							<div class="media-left">
 								<figure class="image is-48x48">
 									<a href="${path }/user/profile?id=${boardDTO.id}"><img src="${data_path }/upload/${boardDTO.img }" alt="작성자 사진"></a>
-<%-- 								<img src="${data_path }${boardDTO.img }" alt="작성자사진"> 
-											user1 테이블에서 사용자 이미지 가져오기
-
---%>
 								</figure>
 							</div>
 							<div class="media-content">

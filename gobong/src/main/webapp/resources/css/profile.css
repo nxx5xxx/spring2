@@ -64,17 +64,17 @@
 	border-radius: 75px;
 }
 
-#follow-text {
+.follow-text {
 	margin-top: 20px;
 }
 
-#follow-text>a, h3 {
+.follow-text>a, h3 {
 	margin-bottom: 7px;
 	color: black;
 	font-weight: bold;
 }
 
-#follow-text, #followingListPopup>strong, #followerListPopup>strong {
+.follow-text, #followingListPopup>strong, #followerListPopup>strong {
 	font-weight: bold;
 	color: black;
 }

@@ -61,7 +61,7 @@
 		</div>
 	</div>
 	<!-- 프로필처럼 나오게 해주세요  -->
-
+<%-- 
 
 	<h2>${like.id }</h2>
 	<h2></h2>
@@ -74,7 +74,7 @@
 	<h2>${like.img3 }</h2>
 	<h2>${like.prv }</h2>
 	<br>
-	<br>
+	<br> --%>
 
 	<c:import url="/WEB-INF/views/footer.jsp" />
 </body>

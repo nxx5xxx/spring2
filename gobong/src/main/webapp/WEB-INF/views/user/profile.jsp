@@ -20,6 +20,11 @@
 	<link rel="stylesheet" href="${data_path }/css/profile.css">
 	<link rel="stylesheet" href="${data_path }/css/main.css">
 	<link rel="stylesheet" href="${data_path }/css/footer.css">
+	<style>
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+	</style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/header.jsp" />
@@ -34,8 +39,10 @@
 	    <div class="media-content">
 	      <div class="content">
 	        <p id="my_introduce">
-	          <strong>${search[0].name }</strong> <small>@${search[0].id }</small><br> <!-- <small>31m</small> -->
-	          자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개
+	          <strong>${search[0].name }</strong> <small>@${search[0].id }</small><br>
+	          <!-- 0727김우주 -->
+	          ${introdueMe_content1 }
+	          <!-- 0727김우주 -->
 	        </p>
 	        
 	      </div>
@@ -43,6 +50,26 @@
 	      <div>
 	      <c:if test="${loginUser.id == search[0].id }">
 	      	<a href="${path }/user/mypage" class="button">정보 수정</a>
+	      	<!-- 0727김우주 -->
+	      	<c:if test="${empty introdueMe_content1 }">
+	      	<!-- 자기소개가 없을경우 -->
+	      	<input type="button" class="button" value="자기소개 수정" onclick="introduceMe(0)">
+	      	</c:if>
+	      	<c:if test="${!empty introdueMe_content1 }">
+	      	<input type="button" class="button" value="자기소개 수정" onclick="introduceMe(1)">
+	      	</c:if>
+	      	<script>
+	      	function introduceMe(sw){
+	    		const popupWidth = 830;
+	    		const popupHeight = 510;
+	    		const popupLeft = window.screen.width/2 - popupWidth/2;
+	    		const popupTop = window.screen.height/2 - popupHeight/2;
+	      		window.open("${path }/user/introduceMe?sw="+sw, '자기소개수정',
+	    				'width=830px,height=520px,scrollbars=no,location=no,left='+popupLeft+',top='+popupTop);
+	      	}
+	      	</script>
+	      	<!-- 0727김우주 -->
+	      
 	      </c:if>
 	      <!-- href="${path }/follows/followingList?id=${userProfile[0].id}" -->
 	      <!-- href="${path }/follows/followerList?id=${userProfile[0].id}" -->
@@ -92,9 +119,9 @@
 	
 </div>
 
-	<div id="followingListPopup" style="display:none;">
+	<div id="followingListPopup" class="scroll" style="display:none;">
 		<strong>${search[0].name }님의 팔로잉 목록</strong>
-			<div id="follow-text">
+			<div class="follow-text">
 				<c:forEach var="following" items="${followingList }">
 				<a href="${path }/user/profile?id=${following.following_id}"><h3>${following.following_id }</h3></a>
 				</c:forEach>
@@ -102,9 +129,9 @@
 		<!-- <button onclick="listExit()" class="button">나가기</button> -->
 	</div>
 	
-	<div id="followerListPopup" style="display:none;">
+	<div id="followerListPopup" class="scroll" style="display:none;">
 		<strong>${search[0].name }님의 팔로워 목록</strong>
-			<div id="follow-text">
+			<div class="follow-text">
 				<c:forEach var="follower" items="${followerList }">
 				<a href="${path }/user/profile?id=${follower.id}"><h3>${follower.id }</h3></a>
 				</c:forEach>

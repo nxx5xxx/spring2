@@ -178,14 +178,18 @@
 								</c:if>
 							</div>
 							</div>
-						<div class="card-body">
-							<textarea id="reply-content" class="form-control" rows="1"
-								placeholder="댓글을 입력하세요"
-								style="width: 100%; height: 135px; resize: none; font-size: 1.3em; border: 1px solid rgba(0, 0, 0, 0.1); padding: 10px"></textarea>
-							<input type="button" class="button is-warning is-light"
-								onclick="replyInsert(${boardDTO.no },'${loginUser.id }')"
-								style="float: right" value="댓글등록">
-						</div>
+							<!-- 0728김우주 -->
+								<c:if test="${loginUser.userLogin == true }">
+									<div class="card-body">
+										<textarea id="reply-content" class="form-control" rows="1"
+											placeholder="댓글을 입력하세요"
+											style="width: 100%; height: 135px; resize: none; font-size: 1.3em; border: 1px solid rgba(0, 0, 0, 0.1); padding: 10px"></textarea>
+										<input type="button" class="button is-warning is-light"
+											onclick="replyInsert(${boardDTO.no },'${loginUser.id }')"
+											style="float: right" value="댓글등록">
+									</div>
+								</c:if>
+							<!-- 0728김우주 -->
 					</div>
 					<div style="align: center;">
 						<c:if test="${boardDTO.id==loginUser.id}">
@@ -194,37 +198,37 @@
 							<a href="${path }/board/boardDel?no=${boardDTO.no}"
 								class="button is-danger is-light">삭제</a>
 						</c:if>
-						<a href="${path }/board/replyInsert?no=${boardDTO.no}"
-							class="button is-warning is-light">댓글</a> <a
-							href="${path }/board/boardlist" class="button is-link is-light">목록</a>
+						<!-- 0728김우주 -->
+						<a href="${path }/board/boardlist" class="button is-link is-light">목록</a>
+						<!-- 0728김우주 -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-function replyInsert(no,id){
-		let replyContent = $("#reply-content").val();	
-		if(replyContent.length>=167){
-			alert("최대글자수를 초과합니다 (현재글자수 :"+replyContent.length+") 166자 이하여야 합니다");
-		}else{
-		 	$.ajax({
-				type: "POST",
-	          url: "${path}/board/replyInsert.do",
-	          data: {no:no,id:id,comment1:replyContent},
-	          encType: "UTF-8",
-	          success: function(){
-	          	alert("댓글을 등록했습니다");
-	          	$("#reply-content").val("");
-	          	$(".container1").load(location.href+' .container1');
-	          },
-	          error :function (result){
-	          	alert("댓글쓰기 실패");
-	          }
-	      	});
-		}
-
-  }
+<script>
+	function replyInsert(no,id){
+			let replyContent = $("#reply-content").val();	
+			if(replyContent.length>=167){
+				alert("최대글자수를 초과합니다 (현재글자수 :"+replyContent.length+") 166자 이하여야 합니다");
+			}else{
+			 	$.ajax({
+					type: "POST",
+		          url: "${path}/board/replyInsert.do",
+		          data: {no:no,id:id,comment1:replyContent},
+		          encType: "UTF-8",
+		          success: function(){
+		          	alert("댓글을 등록했습니다");
+		          	$("#reply-content").val("");
+		          	$(".container1").load(location.href+' .container1');
+		          },
+		          error :function (result){
+		          	alert("댓글쓰기 실패");
+		          }
+		      	});
+			}
+	
+	 }
 </script>
 	<!-- 전재영0723 -->
 	<div class="container1" style="padding-top: 40px;">
