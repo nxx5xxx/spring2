@@ -11,7 +11,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>테스트페이지</title>
 </head>
 <body>
 <h1>

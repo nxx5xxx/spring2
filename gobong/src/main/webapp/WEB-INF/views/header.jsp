@@ -9,6 +9,7 @@
 	integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
 	crossorigin="anonymous"></script>
 <!-- //김우주0719 -->
+<%-- <link rel="icon" href="${data_path }/img/logo.jpg"> --%>
 <style>
 li {
 	line-height: 1.5;

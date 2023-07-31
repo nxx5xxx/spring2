@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-  <title>글 목록 보기</title>
+  <title>세션,쿠키값테스트 - 김우주</title>
 	<link rel="stylesheet" href="${data_path }/css/main.css">
   <style>
   	.content .content1 { width: 750px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
+  <link rel="icon" href="${data_path }/img/logo.jpg">
 	<link rel="stylesheet" href="${data_path }/css/main.css">
 	<link rel="stylesheet" href="${data_path }/css/footer.css">
   <title>main</title>
@@ -37,6 +38,8 @@
             </div>
           </div>
           <div class="content">
+          	<a href="https://github.com/nxx5xxx/gobong/blob/master/readme.md"><strong>readme보기 </strong></a>
+          	<hr>
           	<strong>프로젝트 이름: </strong>Gobong
           	<hr>
           	<strong>프로젝트 기간: </strong>2023.07.10 ~ 07.25
@@ -57,13 +60,11 @@
 			<hr>
           	<strong>DBMS: </strong>Oracle 11 xe
 			<hr>
-          	<strong>External Library: </strong>json, cos, commons (spring security 추가 예정)
+          	<strong>External Library: </strong>json, cos, commons, lombok
 			<hr>
-          	<strong>JAVA Script Plugin: </strong>JQuery
+          	<strong>JAVA Script Plugin: </strong>JQuery 3.7.0
 			<hr>
           	<strong>CSS FrameWork: </strong>bulma.io v0.9.4
-			<hr>
-          	<strong>JAVA Script API: </strong>추가 예정
 			<hr>
             <p style="color: blue;"> #고봉 #프로젝트 개요 </p>
             <time datetime="2023-7-24">11:09 AM - 24 July 2023</time>
@@ -71,68 +72,7 @@
         </div>
       </div>
       <br>
-      <div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <img src="${data_path }/img/logo.jpg" alt="logo">
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">프로젝트 주요 기능 및 특이사항</p>
-              <p class="subtitle is-6">@admin</p>
-            </div>
-          </div>
-          <div class="content">
-          	<strong>회원가입</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-          	<strong>게시글</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-          	<strong>댓글</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-          	<strong>좋아요</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-          	<strong>팔로우</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-          	<strong>아이디/해시태그 검색</strong>
-          	<ul>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          		<li>해당 기능 설명</li>
-          	</ul>
-          	<hr>
-            <p style="color: blue;"> #고봉 #주요기능 #특이사항 </p>
-            <time datetime="2023-7-24">11:09 AM - 24 July 2023</time>
-          </div>
-        </div>
-      </div>
-      <br>
+
       <div class="card">
         <div class="card-content">
           <div class="media">
@@ -160,7 +100,7 @@
 			</figure>
 			<h2 style="font-size:20px;">◆ 프로젝트구성도</h2>
        		<figure class="image is-4by3">
-				<img class="obfit" src="${data_path }/img/coffee.jpg" alt="글사진">
+				<img class="obfit" src="${data_path }/img/pro.png" alt="글사진">
 			</figure>
           	<hr>
             <p style="color: blue;"> #고봉 #설계 #논리적 #물리적 #클래스 #구성 </p>
